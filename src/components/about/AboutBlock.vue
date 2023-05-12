@@ -5,7 +5,7 @@ import TheRainView from "@/components/TheRainView.vue";
 export default {
   components: { TheRainView },
   name: "AboutTeam",
-}
+};
 </script>
 
 <template>

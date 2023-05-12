@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory } from "vue-router";
 
 // import views
 import AboutView from "@/views/AboutView.vue";
@@ -25,15 +25,27 @@ const router = createRouter({
         {
           path: "signin",
           name: "signin",
-          component: UserSignin
+          component: UserSignin,
         },
         {
           path: "signup",
           name: "signup",
-          component: UserSignup
-        }
-      ]
-    }
+          component: UserSignup,
+        },
+        {
+          // MyPage 구현해야함
+          path: "mypage",
+          name: "mypage",
+          component: UserSignin,
+        },
+      ],
+    },
+    {
+      // 관광지 검색 뷰 구현해야함.
+      path: "/trip",
+      name: "trip",
+      component: AboutView,
+    },
     // {
     //   path: "/pages/landing-pages/about-us",
     //   name: "about",

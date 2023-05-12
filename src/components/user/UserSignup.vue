@@ -1,31 +1,32 @@
 <script setup>
 import { onMounted } from "vue";
+import router from "@/router";
 
 // example components
-import DefaultNavbar from "@/components/common/NavbarDefault.vue";
 import HeaderDefault from "@/components/common/HeaderDefault.vue";
 
 //Vue Material Kit 2 components
 import MaterialInput from "@/components/Material/MaterialInput.vue";
-import MaterialSwitch from "@/components/Material/MaterialSwitch.vue";
 import MaterialButton from "@/components/Material/MaterialButton.vue";
+import MaterialProgress from "@/components/Material/MaterialProgress.vue";
 
 // material-input
 import setMaterialInput from "@/assets/js/material-input";
 onMounted(() => {
   setMaterialInput();
 });
+const hello = () => {
+  alert("회원가입 진행해야함");
+  router.push("/");
+};
 </script>
 <template>
   <nav
     class="navbar navbar-expand-lg top-0 z-index-3 w-100 shadow-none navbar-transparent position-absolute my-3"
   >
-    <div
-      class='container'
-    >
+    <div class="container">
       <RouterLink
         class="trip-logo navbar-brand d-none d-md-block text-white font-weight-bolder ms-sm-3"
-        
         :to="{ name: 'about' }"
         rel="tooltip"
         title="Designed and Coded by Creative Tim"
@@ -33,7 +34,6 @@ onMounted(() => {
       >
         Enjoy Trip
       </RouterLink>
-      
     </div>
   </nav>
   <HeaderDefault>
@@ -41,7 +41,7 @@ onMounted(() => {
       class="page-header align-items-start min-vh-100"
       :style="{
         backgroundImage:
-          'url(https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80)'
+          'url(https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80)',
       }"
       loading="lazy"
     >
@@ -62,55 +62,105 @@ onMounted(() => {
                     Sign Up
                   </h4>
                   <div class="row mt-1">
-                    <h6
-                    class="text-white text-center mt-0 mb-0"
-                  >
-                    반가워요~!
-                  </h6>
+                    <h6 class="text-white text-center mt-0 mb-0">반가워요~!</h6>
                   </div>
                 </div>
               </div>
               <div class="card-body">
-                <form role="form" class="text-start">
+                <form role="form" class="text-start" onsubmit="return false;">
                   <MaterialInput
                     id="name"
                     class="input-group-outline my-3"
-                    :label="{ text: '이름을 입력해주세요.', class: 'form-label' }"
+                    :label="{
+                      text: '이름을 입력해주세요.',
+                      class: 'form-label',
+                    }"
                     type="text"
                   />
                   <hr />
                   <MaterialInput
                     id="email"
                     class="input-group-outline my-3"
-                    :label="{ text: '아이디를 입력해주세요.', class: 'form-label' }"
+                    :label="{
+                      text: '아이디를 입력해주세요.',
+                      class: 'form-label',
+                    }"
                     type="email"
                   />
                   <MaterialInput
                     id="password"
                     class="input-group-outline mb-3"
-                    :label="{ text: '비밀번호를 입력해주세요.', class: 'form-label' }"
+                    :label="{
+                      text: '비밀번호를 입력해주세요.',
+                      class: 'form-label',
+                    }"
                     type="password"
                   />
                   <MaterialInput
                     id="password"
                     class="input-group-outline mb-3"
-                    :label="{ text: '비밀번호를 입력해주세요.', class: 'form-label' }"
+                    :label="{
+                      text: '비밀번호를 입력해주세요.',
+                      class: 'form-label',
+                    }"
                     type="password"
                   />
                   <hr />
                   <MaterialInput
                     id="email"
                     class="input-group-outline my-3"
-                    :label="{ text: '이메일을 입력해주세요.', class: 'form-label' }"
+                    :label="{
+                      text: '이메일을 입력해주세요.',
+                      class: 'form-label',
+                    }"
                     type="email"
                   />
+                  <div class="form-group d-flex justify-content-between">
+                    <div class="col m-2">
+                      <label class="input-group text-dark" for="sido"
+                        >시/도</label
+                      >
+                      <select
+                        class="form-select input-group-outline"
+                        id="sido"
+                        name="sido"
+                      >
+                        <option selected value="basicSelect">
+                          선택하기...
+                        </option>
+                        <option value="1">서울특별시</option>
+                        <option value="2">대구특별시</option>
+                        <option value="3">제주특별시</option>
+                      </select>
+                    </div>
+                    <div class="col m-2">
+                      <label class="input-group text-dark" for="gugun"
+                        >구/군</label
+                      >
+                      <select
+                        class="form-select input-group-outline"
+                        id="gugun"
+                        name="gugun"
+                      >
+                        <option selected value="basicSelect">
+                          선택하기...
+                        </option>
+                        <option value="1">강동구</option>
+                        <option value="2">남양군</option>
+                        <option value="3">시흥군</option>
+                      </select>
+                    </div>
+                  </div>
 
+                  <MaterialProgress color="success" :value="60" />
                   <div class="text-center">
                     <MaterialButton
                       class="my-4 mb-2"
                       variant="gradient"
                       color="secondary"
+                      size="lg"
                       fullWidth
+                      @click="hello()"
                       >회원가입</MaterialButton
                     >
                   </div>

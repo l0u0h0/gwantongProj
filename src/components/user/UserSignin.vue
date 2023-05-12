@@ -1,8 +1,8 @@
 <script setup>
 import { onMounted } from "vue";
+import router from "@/router";
 
 // example components
-import DefaultNavbar from "@/components/common/NavbarDefault.vue";
 import HeaderDefault from "@/components/common/HeaderDefault.vue";
 
 //Vue Material Kit 2 components
@@ -12,20 +12,22 @@ import MaterialButton from "@/components/Material/MaterialButton.vue";
 
 // material-input
 import setMaterialInput from "@/assets/js/material-input";
+
 onMounted(() => {
   setMaterialInput();
 });
+const Login = () => {
+  alert("Login 구현 해야함");
+  router.push("/");
+};
 </script>
 <template>
   <nav
     class="navbar navbar-expand-lg top-0 z-index-3 w-100 shadow-none navbar-transparent position-absolute my-3"
   >
-    <div
-      class='container'
-    >
+    <div class="container">
       <RouterLink
         class="trip-logo navbar-brand d-none d-md-block text-white font-weight-bolder ms-sm-3"
-        
         :to="{ name: 'about' }"
         rel="tooltip"
         title="Designed and Coded by Creative Tim"
@@ -33,7 +35,6 @@ onMounted(() => {
       >
         Enjoy Trip
       </RouterLink>
-      
     </div>
   </nav>
   <HeaderDefault>
@@ -41,7 +42,7 @@ onMounted(() => {
       class="page-header align-items-start min-vh-100"
       :style="{
         backgroundImage:
-          'url(https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80)'
+          'url(https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80)',
       }"
       loading="lazy"
     >
@@ -68,13 +69,19 @@ onMounted(() => {
                   <MaterialInput
                     id="email"
                     class="input-group-outline my-3"
-                    :label="{ text: '아이디를 입력해주세요.', class: 'form-label' }"
+                    :label="{
+                      text: '아이디를 입력해주세요.',
+                      class: 'form-label',
+                    }"
                     type="email"
                   />
                   <MaterialInput
                     id="password"
                     class="input-group-outline mb-3"
-                    :label="{ text: '비밀번호를 입력해주세요.', class: 'form-label' }"
+                    :label="{
+                      text: '비밀번호를 입력해주세요.',
+                      class: 'form-label',
+                    }"
                     type="password"
                   />
                   <MaterialSwitch
@@ -91,12 +98,16 @@ onMounted(() => {
                       variant="gradient"
                       color="secondary"
                       fullWidth
+                      @click="Login()"
                       >로그인</MaterialButton
                     >
                   </div>
                   <p class="mt-4 text-sm text-center">
                     계정이 있으신가요 ?
-                    <router-link :to="{ name: 'signup' }" class="text-info text-gradient font-weight-bold">
+                    <router-link
+                      :to="{ name: 'signup' }"
+                      class="text-info text-gradient font-weight-bold"
+                    >
                       회원가입
                     </router-link>
                   </p>

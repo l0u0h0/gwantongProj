@@ -1,5 +1,4 @@
 <script setup>
-
 import { RouterLink } from "vue-router";
 import { ref, watch, defineProps } from "vue";
 import { useWindowsWidth } from "../../assets/js/useWindowsWidth";
@@ -8,8 +7,6 @@ import { useWindowsWidth } from "../../assets/js/useWindowsWidth";
 // import ArrDark from "@/assets/img/down-arrow-dark.svg";
 // import downArrow from "@/assets/img/down-arrow.svg";
 // import DownArrWhite from "@/assets/img/down-arrow-white.svg";
-
-
 
 const props = defineProps({
   action: {
@@ -20,29 +17,29 @@ const props = defineProps({
     default: () => ({
       route: "https://www.creative-tim.com/product/vue-material-kit",
       color: "bg-gradient-success",
-      label: "Login"
-    })
+      label: "Login",
+    }),
   },
   transparent: {
     type: Boolean,
-    default: false
+    default: false,
   },
   light: {
     type: Boolean,
-    default: false
+    default: false,
   },
   dark: {
     type: Boolean,
-    default: false
+    default: false,
   },
   sticky: {
     type: Boolean,
-    default: false
+    default: false,
   },
   darkText: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 });
 
 // set arrow  color
@@ -106,7 +103,7 @@ console.log(user);
       'my-3 blur border-radius-lg z-index-3 py-2 shadow py-2 start-0 end-0 mx-4 position-absolute mt-4':
         props.sticky,
       'navbar-light bg-white py-3': props.light,
-      ' navbar-dark bg-gradient-dark z-index-3 py-3': props.dark
+      ' navbar-dark bg-gradient-dark z-index-3 py-3': props.dark,
     }"
   >
     <div
@@ -121,7 +118,7 @@ console.log(user);
         :class="[
           (props.transparent && textDark.value) || !props.transparent
             ? 'text-dark font-weight-bolder ms-sm-3'
-            : 'text-white font-weight-bolder ms-sm-3'
+            : 'text-white font-weight-bolder ms-sm-3',
         ]"
         :to="{ name: 'about' }"
         rel="tooltip"
@@ -201,9 +198,11 @@ console.log(user);
               여행정보공유
             </a>
           </li>
-
         </ul>
-        <ul v-if="this.user" class="header-text navbar-nav navbar-nav-hover ms-3">
+        <ul
+          v-if="this.user"
+          class="header-text navbar-nav navbar-nav-hover ms-3"
+        >
           <li class="nav-item dropdown dropdown-hover mx-2">
             <a
               href="https://www.github.com/creativetimofficial/vue-material-kit"
@@ -224,12 +223,12 @@ console.log(user);
         </ul>
         <ul v-else class="header-text navbar-nav navbar-nav-hover ms-3">
           <li class="nav-item dropdown dropdown-hover mx-2">
-            <a
-              href="https://www.github.com/creativetimofficial/vue-material-kit"
+            <router-link
               class="nav-link d-flex cursor-pointer align-items-center"
+              :to="{ name: 'signup' }"
             >
               회원가입
-            </a>
+            </router-link>
           </li>
           <li class="nav-item">
             <a
