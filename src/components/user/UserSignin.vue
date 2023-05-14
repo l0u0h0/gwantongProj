@@ -89,7 +89,7 @@ const Login = () => {
                     id="rememberMe"
                     labelClass="mb-0 ms-3"
                     checked
-                    >ID 기억하기</MaterialSwitch
+                    >ID 저장</MaterialSwitch
                   >
 
                   <div class="text-center">

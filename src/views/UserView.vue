@@ -6,6 +6,7 @@
 
 <script>
 export default {
-  name: 'user',
+  // eslint-disable-next-line vue/multi-word-component-names
+  name: "user",
 };
 </script>

@@ -53,6 +53,7 @@ onUnmounted(() => {
 </script>
 <template>
   <div>
+    <!-- 로그인 하기 전 상태 -->
     <DefaultNavbar
       :action="{
         route: '/user/signin',
@@ -61,6 +62,15 @@ onUnmounted(() => {
       }"
       transparent
     />
+    <!-- // 로그인 한 상태
+    <DefaultNavbar
+      :action="{
+        route: '/user/logout',
+        label: '로그아웃',
+        color: 'btn-white',
+      }"
+      transparent
+    /> -->
     <header class="bg-gradient-dark">
       <div
         class="page-header min-vh-75"
