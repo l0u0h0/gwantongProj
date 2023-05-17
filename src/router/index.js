@@ -3,6 +3,8 @@ import { createRouter, createWebHistory } from "vue-router";
 // import views
 import AboutView from "@/views/AboutView.vue";
 import UserView from "@/views/UserView.vue";
+import TripView from "@/views/TripView.vue";
+import BoardView from "@/views/BoardView.vue";
 
 // import component
 import UserSignin from "@/components/user/UserSignin.vue";
@@ -44,18 +46,14 @@ const router = createRouter({
       // 관광지 검색 뷰 구현해야함.
       path: "/trip",
       name: "trip",
-      component: AboutView,
+      component: TripView,
     },
-    // {
-    //   path: "/pages/landing-pages/about-us",
-    //   name: "about",
-    //   component: AboutView,
-    // },
-    // {
-    //   path: "/sections/page-sections/page-headers",
-    //   name: "about",
-    //   component: AboutView,
-    // },
+    {
+      // 관통 게시판 뷰
+      path: "/board",
+      name: "board",
+      component: BoardView,
+    },
   ],
 });
 

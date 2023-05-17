@@ -183,20 +183,9 @@ console.log(user);
             </a>
           </li>
           <li class="nav-item dropdown dropdown-hover mx-2">
-            <a
-              href="https://www.github.com/creativetimofficial/vue-material-kit"
-              class="nav-link d-flex cursor-pointer align-items-center"
-            >
-              핫플자랑하기
-            </a>
-          </li>
-          <li class="nav-item dropdown dropdown-hover mx-2">
-            <a
-              href="https://www.github.com/creativetimofficial/vue-material-kit"
-              class="nav-link d-flex cursor-pointer align-items-center"
-            >
-              여행정보공유
-            </a>
+            <router-link :to="{ name: 'board' }" class="nav-link d-flex cursor-pointer align-items-center">
+              게시판
+            </router-link>
           </li>
         </ul>
         <ul
