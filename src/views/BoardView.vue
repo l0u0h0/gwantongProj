@@ -75,14 +75,14 @@ onUnmounted(() => {
                 <h1>Ji</h1>
                 <h1>Young</h1>
               </div>
-              <p class="lead mb-4 text-white opacity-8">-- 게시판 페이지 ==</p>
+              <p class="lead mb-4 text-white opacity-8">== 게시판 페이지 ==</p>
             </div>
           </div>
         </div>
       </div>
     </header>
     <div class="card card-body shadow-xl mx-3 mx-md-4 mt-n6">
-      <BoardList />
+      <router-view />
     </div>
     <DefaultFooter />
   </div>

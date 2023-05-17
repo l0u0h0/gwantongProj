@@ -26,7 +26,7 @@ defineProps({
                 <thead>
                   <tr>
                     <th v-for="(header, index) in headers" :key="header"
-                      class="text-uppercase text-dark text-lg text-center font-weight-bolder opacity-9"
+                      class="text-uppercase text-dark text-lg text-center font-weight-bolder"
                       :class="{ 'ps-2': index == 1 }">
                       {{ header }}
                     </th>
@@ -34,43 +34,45 @@ defineProps({
                 </thead>
                 <tbody>
                   <tr v-for="(
-                        {
-                          no,
-                          title,
-                          author,
-                          date,
-                          view,
-                        },
-                          index
-                      ) of rows" :key="index">
+                          {
+                            no,
+                            title,
+                            author,
+                            date,
+                            view,
+                          },
+                            index
+                        ) of rows" :key="index">
                     <td>
-                      <div class="d-flex px-2 py-1">
-                          <h6 class="mb-0 text-s">
-                            <a :href="route" data-toggle="tooltip"
-                              data-original-title="Edit user">
-                              {{ no }}
-                            </a>
-                          </h6>
+                      <div class="d-flex px-3 py-2 opacity-9">
+                        <h6 class="mb-0 text-s">
+                          {{ no }}
+                        </h6>
                       </div>
                     </td>
                     <td>
-                      <div class="d-flex px-2 py-1">
-                          <h6 class="mb-0 text-s">{{ title }}</h6>
+                      <div class="d-flex px-3 py-2 opacity-9">
+                        <h6 class="mb-0 text-s">
+                          <router-link :to="{ name: 'boardview', params: { no: no } }" data-toggle="tooltip"
+                            data-original-title="Edit user">
+                            {{ title }}
+                          </router-link>
+                        </h6>
                       </div>
                     </td>
                     <td>
-                      <div class="d-flex px-2 py-1">
-                          <h6 class="mb-0 text-s">{{ author }}</h6>
+                      <div class="d-flex px-3 py-2 opacity-9">
+                        <h6 class="mb-0 text-s">{{ author }}</h6>
                       </div>
                     </td>
                     <td>
-                      <div class="d-flex px-2 py-1">
-                          <h6 class="mb-0 text-s">{{ date }}</h6>
+                      <div class="d-flex px-3 py-2 opacity-9">
+                        <h6 class="mb-0 text-s">{{ date }}</h6>
                       </div>
                     </td>
                     <td>
-                      <div class="d-flex px-2 py-1">
-                          <h6 class="mb-0 text-s">{{ view }}</h6>
+                      <div class="d-flex px-3 py-2 opacity-9">
+                        <h6 class="mb-0 text-s">{{ view }}</h6>
                       </div>
                     </td>
                   </tr>

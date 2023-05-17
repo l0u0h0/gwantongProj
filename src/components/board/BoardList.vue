@@ -1,6 +1,6 @@
 <script setup>
 // Vue Material Kit 2 component
-import Table from "@/components/common/tables/Table.vue";
+import Table from "@/components/common/tables/BoardTable.vue";
 import { onMounted } from "vue";
 import MaterialButton from "../Material/MaterialButton.vue";
 
@@ -70,11 +70,12 @@ const tableData = {
       <div id="typed-string">
         <h1>Q&A 게시판</h1>
       </div>
+      <h6>-======================-</h6>
     </div>
 
     <Table class="pb-6" v-bind="tableData" />
     <div class="mt-n5 mb-6">
-      <MaterialButton variant="gradient" color="secondary" size="lg" class="btn-icon mx-2 hao">
+      <MaterialButton variant="gradient" color="secondary" size="lg" class="btn-icon mx-2 hao" @click="$router.push({ name: 'boardwrite' })">
         <div class="d-flex align-items-center">
           글쓰기
           <i class="material-icons ms-2" aria-hidden="true">favorite</i>

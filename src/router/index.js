@@ -9,6 +9,10 @@ import BoardView from "@/views/BoardView.vue";
 // import component
 import UserSignin from "@/components/user/UserSignin.vue";
 import UserSignup from "@/components/user/UserSignup.vue";
+import BoardList from "@/components/board/BoardList.vue";
+import BoardDetail from "@/components/board/BoardDetail.vue";
+import BoardWrite from "@/components/board/BoardWrite.vue";
+import BoardModify from "@/components/board/BoardModify.vue";
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
@@ -52,7 +56,30 @@ const router = createRouter({
       // 관통 게시판 뷰
       path: "/board",
       name: "board",
+      redirect: "/board/list",
       component: BoardView,
+      children: [
+        {
+          path: "list",
+          name: "list",
+          component: BoardList,
+      },
+        {
+          path: "boardview/:no",
+          name: "boardview",
+          component: BoardDetail,
+        },
+        {
+          path: "boardwrite",
+          name: "boardwrite",
+          component: BoardWrite,
+        },
+        {
+          path: "boardmodify/:no",
+          name: "boardmodify",
+          component: BoardModify,
+        }
+      ]
     },
   ],
 });
