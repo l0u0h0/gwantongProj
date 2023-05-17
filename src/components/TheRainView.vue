@@ -264,13 +264,11 @@
 <script>
 export default {
   name: "TheRainView",
-  components: {},
   data() {
     return {
       count: [],
     };
   },
-  created() {},
 };
 </script>
 
