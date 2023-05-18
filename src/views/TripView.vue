@@ -11,20 +11,21 @@ import bg0 from "@/assets/img/rock_grandpa.jpg";
 //dep
 import Typed from "typed.js";
 
-//sections
-import Information from "@/components/about/AboutInformation.vue";
-import AboutBlock from "@/components/about/AboutBlock.vue";
-import Featuring from "@/components/about/AboutFeaturing.vue";
+//sections=
+import TripList from "@/components/trip/TripList.vue";
 
 const body = document.getElementsByTagName("body")[0];
+
+let chargers = ['a','b'];
+
 //hooks
 onMounted(() => {
   body.classList.add("about-us");
   body.classList.add("bg-gray-200");
 
-  if (document.getElementById("typed-s")) {
+  if (document.getElementById("typed")) {
     // eslint-disable-next-line no-unused-vars
-    var typeds = new Typed("#typed-s", {
+    var typeds = new Typed("#typed", {
       stringsElement: "#typed-strings-s",
       typeSpeed: 90,
       backSpeed: 90,
@@ -77,16 +78,14 @@ onUnmounted(() => {
                 <h1>Seung</h1>
                 <h1>Sooo</h1>
               </div>
-              <p class="lead mb-4 text-white opacity-8">-- 관광지 검색 ==</p>
+              <p class="lead mb-4 text-white opacity-8">== 관광지 검색 ==</p>
             </div>
           </div>
         </div>
       </div>
     </header>
     <div class="card card-body shadow-xl mx-3 mx-md-4 mt-n6">
-      <Information />
-      <AboutBlock />
-      <Featuring />
+      <TripList :chargers="chargers" />
     </div>
     <DefaultFooter />
   </div>
