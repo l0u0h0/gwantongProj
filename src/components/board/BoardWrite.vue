@@ -49,7 +49,7 @@ const reset = () => {
               <label for="content" class="text-dark mb-n5">내용</label>
               <MaterialTextArea id="content" class="input-group-outline my-3" :label="{
                 class: 'form-label',
-              }" type="text" />
+              }">내용을 입력해주세요.</MaterialTextArea>
               <hr />
 
               <div class="text-center d-flex">

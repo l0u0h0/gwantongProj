@@ -61,7 +61,7 @@ import DefaultCounterCard from "@/components/common/cards/DefaultCounterCard.vue
         <div class="col-md-3">
           <DefaultCounterCard
             title="Hours"
-            description="That meets quality standards required by our users"
+            description="T기상청 API를 넣는다면 어떨까?s"
             :count="3400"
             suffix="+"
             :duration="3000"
