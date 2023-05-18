@@ -81,23 +81,23 @@ onUnmounted(() => {
           <div class="row justify-content-center">
             <div class="col-lg-8 text-center mx-auto my-auto">
               <h1 class="text-white">
-                Hello World! <span class="text-white" id="typed"></span>
+                DAMP<span class="text-white" id="typed"></span>
               </h1>
               <div id="typed-strings">
-                <h1>Kim</h1>
-                <h1>Jin</h1>
-                <h1>Aaa</h1>
+                <h1>roject</h1>
               </div>
-              <h1 class="text-white">&</h1>
+              <h1 class="text-white opacity-5">&</h1>
               <h1 class="text-white">
-                Bye World! <span class="text-white" id="typed-s"></span>
+                <span class="text-white" id="typed-s"></span>
               </h1>
               <div id="typed-strings-s">
-                <h1>Park</h1>
-                <h1>Seung</h1>
-                <h1>Sooo</h1>
+                <h1>지역별 관광지</h1>
+                <h1>나의 여행계획</h1>
+                <h1>여행 게시판</h1>
               </div>
-              <p class="lead mb-4 text-white opacity-8">-- 뭐라고 슬까 ==</p>
+              <p class="lead mb-4 text-white opacity-8">
+                관광지 정보 검색 및 커뮤니티
+              </p>
             </div>
           </div>
         </div>
