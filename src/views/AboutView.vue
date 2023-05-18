@@ -58,16 +58,17 @@ onUnmounted(() => {
       :action="{
         route: '/user/signin',
         label: '로그인',
-        color: 'btn-white',
+        color: 'btn-secondary',
       }"
-      transparent
+      :sticky="true"
+      :transparent="false"
     />
     <!-- // 로그인 한 상태
     <DefaultNavbar
       :action="{
         route: '/user/logout',
         label: '로그아웃',
-        color: 'btn-white',
+        color: 'btn-secondary',
       }"
       transparent
     /> -->
