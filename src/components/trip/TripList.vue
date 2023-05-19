@@ -1,14 +1,47 @@
 <!-- eslint-disable no-unused-vars -->
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
+import axios from "axios";
+
 import TripMap from "./TripMap.vue"
 import MaterialButton from "@/components/Material/MaterialButton.vue";
 import Table from "@/components/common/tables/TripTable.vue";
 
+// 드롭다운 상태 변수 생성
 let showDropdownSido = ref(false);
 let showDropdownGugun = ref(false);
+let showDropdownType = ref(false);
+
+let area_val = 0;
+let area_detail_val = 0;
+let content_id_val = 0;
 
 const charger = [];
+
+onMounted(() => {
+  const areaUrl = 
+    "https://apis.data.go.kr/B551011/KorService1/areaCode1?serviceKey=" +
+    process.env.VUE_APP_AREA_API_KEY +
+    "&numOfRows=20&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json";
+
+  axios.get(areaUrl)
+    .then((data) => makeOption(data));
+    
+  function makeOption(data) {
+    const areas = data.response.body.items.item;
+
+    let sel = document.getElementById("search-area");
+    areas.forEach((area) => {
+      let li = document.createElement("li");
+      let opt = document.createElement("a");
+      opt.setAttribute("value", area.code);
+      opt.appendChild(document.createTextNode(area.name));
+
+      sel.appendChild(opt);
+    })
+  }
+})
+
 </script>
 <template>
   <section class="py-7">
@@ -19,7 +52,7 @@ const charger = [];
           <div class="dropdown mt-n3">
             <MaterialButton
               variant="gradient"
-              color="secondary"
+              color="dark"
               class="dropdown-toggle"
               :class="{ show: showDropdownSido }"
               @focusout="showDropdownSido = false"
@@ -32,23 +65,14 @@ const charger = [];
             </MaterialButton>
 
             <ul
+              id="search-area"
               class="dropdown-menu px-2 py-3"
               :class="{ show: showDropdownSido }"
               aria-labelledby="dropdownMenuButton"
             >
               <li>
-                <a class="dropdown-item border-radius-md" href="javascript:;"
+                <a class="dropdown-item border-radius-md" href='javascript:setAreaVal();'
                   >서울</a
-                >
-              </li>
-              <li>
-                <a class="dropdown-item border-radius-md" href="javascript:;"
-                  >경기도</a
-                >
-              </li>
-              <li>
-                <a class="dropdown-item border-radius-md" href="javascript:;"
-                  >인천</a
                 >
               </li>
             </ul>
@@ -56,7 +80,7 @@ const charger = [];
           <div class="dropdown mt-3">
             <MaterialButton
               variant="gradient"
-              color="secondary"
+              color="dark"
               class="dropdown-toggle"
               :class="{ show: showDropdownGugun }"
               @focusout="showDropdownGugun = false"
@@ -86,6 +110,68 @@ const charger = [];
               <li>
                 <a class="dropdown-item border-radius-md" href="javascript:;"
                   >수정구</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="dropdown mt-3">
+            <MaterialButton
+              variant="gradient"
+              color="dark"
+              class="dropdown-toggle"
+              :class="{ show: showDropdownType }"
+              @focusout="showDropdownType = false"
+              id="dropdownMenuButton"
+              data-bs-toggle="dropdown"
+              :area-expanded="showDropdownType"
+              @click="showDropdownType = !showDropdownType"
+            >
+              유형별
+            </MaterialButton>
+
+            <ul
+              class="dropdown-menu px-2 py-3"
+              :class="{ show: showDropdownType }"
+              aria-labelledby="dropdownMenuButton"
+            >
+              <li>
+                <a class="dropdown-item border-radius-md" href="javascript:;"
+                  >관광지</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item border-radius-md" href="javascript:;"
+                  >문화시설</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item border-radius-md" href="javascript:;"
+                  >축제공연행사</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item border-radius-md" href="javascript:;"
+                  >여행코스</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item border-radius-md" href="javascript:;"
+                  >레포츠</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item border-radius-md" href="javascript:;"
+                  >숙박</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item border-radius-md" href="javascript:;"
+                  >쇼핑</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item border-radius-md" href="javascript:;"
+                  >음식점</a
                 >
               </li>
             </ul>
