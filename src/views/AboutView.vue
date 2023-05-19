@@ -53,7 +53,7 @@ onUnmounted(() => {
 </script>
 <template>
   <div>
-    <!-- 로그인 하기 전 상태 -->
+    <!-- 로그인 하기 전 상상태 -->
     <DefaultNavbar
       :action="{
         route: '/user/signin',
