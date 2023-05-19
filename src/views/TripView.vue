@@ -48,22 +48,22 @@ onUnmounted(() => {
       :action="{
         route: '/user/signin',
         label: '로그인',
-        color: 'btn-white',
+        color: 'btn-secondary',
       }"
-      transparent
+      :sticky="true"
     />
     <!-- // 로그인 한 상태
     <DefaultNavbar
       :action="{
         route: '/user/logout',
         label: '로그아웃',
-        color: 'btn-white',
+        color: 'btn-secondary',
       }"
-      transparent
+      :sticky="true"
     /> -->
     <header class="bg-gradient-dark">
       <div
-        class="page-header min-vh-75"
+        class="page-header min-vh-55"
         :style="{ backgroundImage: `url(${bg0})` }"
       >
         <span class="mask bg-gradient-dark opacity-6"></span>
@@ -71,12 +71,11 @@ onUnmounted(() => {
           <div class="row justify-content-center">
             <div class="col-lg-8 text-center mx-auto my-auto">
               <h1 class="text-white">
-                Hello World! <span class="text-white" id="typed"></span>
+                <span class="text-white" id="typed"></span> 관광지
               </h1>
               <div id="typed-strings-s">
-                <h1>Park</h1>
-                <h1>Seung</h1>
-                <h1>Sooo</h1>
+                <h1>지역별</h1>
+                <h1>유형별</h1>
               </div>
               <p class="lead mb-4 text-white opacity-8">== 관광지 검색 ==</p>
             </div>

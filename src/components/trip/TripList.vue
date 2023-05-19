@@ -14,11 +14,9 @@ const charger = [];
   <section class="py-7">
     <div class="container">
       <div class="row align-items-center">
-        <div class="section-header text-center mt-n3">
-          <h2 class="text-dark">관관관자놀이</h2>
-        </div>
-        <div class="row col-lg-2 text-center">
-          <div class="dropdown mt-3">
+        <div class="row col-lg-3 text-center">
+          <h4 class="mt-n6">Filter</h4>
+          <div class="dropdown mt-n3">
             <MaterialButton
               variant="gradient"
               color="secondary"
@@ -93,7 +91,7 @@ const charger = [];
             </ul>
           </div>
         </div>
-        <div class="col-lg-10 ms-auto mt-lg-0">
+        <div class="col-lg-9 ms-auto mt-lg-0">
           <div class="position-relative">
             <trip-map class="mt-4" :chargers="charger"></trip-map>
           </div>

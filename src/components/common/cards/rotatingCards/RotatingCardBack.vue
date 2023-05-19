@@ -40,7 +40,6 @@ defineProps({
           v-for="({ route, color, label }, index) of action"
           :key="index"
           :href="route"
-          target="_blank"
           class="btn btn-sm mt-3 inline-block ms-1"
           :class="`${color ? `btn-${color}` : 'btn-white'}`"
           >{{ label }}</a

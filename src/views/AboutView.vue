@@ -70,7 +70,7 @@ onUnmounted(() => {
         label: '로그아웃',
         color: 'btn-secondary',
       }"
-      transparent
+      :sticky="true"
     /> -->
     <header class="bg-gradient-dark">
       <div
@@ -78,7 +78,7 @@ onUnmounted(() => {
         :style="{ backgroundImage: `url(${bg0})` }"
       >
         <span class="mask bg-gradient-dark opacity-6"></span>
-        <div class="container">
+        <div class="container mt-3">
           <div class="row justify-content-center">
             <div class="col-lg-8 text-center mx-auto my-auto">
               <h1 class="text-white">
@@ -97,7 +97,7 @@ onUnmounted(() => {
                 <h1>여행 게시판</h1>
               </div>
               <p class="lead mb-4 text-white opacity-8">
-                관광지 정보 검색 및 커뮤니티
+                관광지 정보 검색 서비스
               </p>
             </div>
           </div>

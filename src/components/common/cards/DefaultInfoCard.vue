@@ -47,7 +47,7 @@ export default {
         :class="`${
           typeof icon == 'object'
             ? `text-${icon.color} text-${icon.size}`
-            : 'text-success text-3xl'
+            : 'text-dark text-6xl'
         }`"
         >{{ typeof icon == "object" ? icon.component : icon }}</i
       >

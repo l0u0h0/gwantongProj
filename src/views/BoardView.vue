@@ -45,22 +45,22 @@ onUnmounted(() => {
       :action="{
         route: '/user/signin',
         label: '로그인',
-        color: 'btn-white',
+        color: 'btn-secondary',
       }"
-      transparent
+      :sticky="true"
     />
     <!-- // 로그인 한 상태
     <DefaultNavbar
       :action="{
         route: '/user/logout',
         label: '로그아웃',
-        color: 'btn-white',
+        color: 'btn-secondary',
       }"
-      transparent
+      :sticky="true"
     /> -->
     <header class="bg-gradient-dark">
       <div
-        class="page-header min-vh-45"
+        class="page-header min-vh-55"
         :style="{ backgroundImage: `url(${bg})` }"
       >
         <span class="mask bg-gradient-dark opacity-8"></span>

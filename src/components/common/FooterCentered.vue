@@ -7,23 +7,23 @@ defineProps({
     default: () => [
       {
         icon: '<i class="fab fa-facebook text-lg opacity-8"></i>',
-        link: "https://www.facebook.com/CreativeTim/",
+        link: "https://github.com/suhwan2004",
       },
       {
         icon: '<i class="fab fa-twitter text-lg opacity-8"></i>',
-        link: "https://twitter.com/creativetim",
+        link: "https://github.com/suhwan2004",
       },
       {
         icon: '<i class="fab fa-dribbble text-lg opacity-8"></i>',
-        link: "https://dribbble.com/creativetim",
+        link: "https://github.com/suhwan2004",
       },
       {
         icon: '<i class="fab fa-github text-lg opacity-8"></i>',
-        link: "https://github.com/creativetimofficial",
+        link: "https://github.com/suhwan2004",
       },
       {
         icon: '<i class="fab fa-youtube text-lg opacity-8"></i>',
-        link: "https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w",
+        link: "https://github.com/suhwan2004",
       },
     ],
   },
@@ -32,15 +32,15 @@ defineProps({
     name: String,
     href: String,
     default: () => [
-      { href: "https://www.creative-tim.com/", name: "Company" },
-      { href: "https://www.creative-tim.com/presentation", name: "About Us" },
-      { href: "https://www.creative-tim.com/presentation", name: "Team" },
+      { href: "https://github.com/suhwan2004", name: "Company" },
+      { href: "https://github.com/suhwan2004", name: "About Us" },
+      { href: "https://github.com/suhwan2004", name: "Team" },
       {
-        href: "https://www.creative-tim.com/templates/vuejs",
+        href: "https://github.com/suhwan2004",
         name: "Products",
       },
-      { href: "https://www.creative-tim.com/blog", name: "Blog" },
-      { href: "https://www.creative-tim.com/license", name: "License" },
+      { href: "https://github.com/suhwan2004", name: "Blog" },
+      { href: "https://github.com/suhwan2004", name: "License" },
     ],
   },
 });
@@ -75,7 +75,7 @@ defineProps({
       <div class="row">
         <div class="col-8 mx-auto text-center mt-1">
           <p class="mb-0 text-secondary">
-            Copyright © {{ new Date().getFullYear() }} SSAFY by JinA Kim.
+            Copyright © {{ new Date().getFullYear() }} SSAFY by JinA Kim & SeungSu Park.
           </p>
         </div>
       </div>

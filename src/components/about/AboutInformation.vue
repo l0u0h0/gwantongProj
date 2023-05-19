@@ -5,15 +5,15 @@ import RotatingCardBack from "../common/cards/rotatingCards/RotatingCardBack.vue
 import RotatingCardFront from "../common/cards/rotatingCards/RotatingCardFront.vue";
 import RotatingCard from "../common/cards/rotatingCards/RotatingCard.vue";
 </script>
-<template>
+<template> 
   <section class="py-7">
     <div class="container">
       <div class="row align-items-center">
         <div class="col-lg-8">
           <div class="row justify-content-start">
             <DefaultInfoCard
-              color="info"
-              icon="public"
+              color="secondary"
+              icon="chair"
               title="안정감"
               description="안정감을 느낄 수 있는 여행코스를 제공합니다."
             />
@@ -45,21 +45,20 @@ import RotatingCard from "../common/cards/rotatingCards/RotatingCard.vue";
           >
             <RotatingCard>
               <RotatingCardFront
-                image="https://images.unsplash.com/photo-1569683795645-b62e50fbf103?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"
+                image="https://img.etnews.com/photonews/2208/1567328_20220830181242_354_0001.jpg"
                 icon="touch_app"
                 title="카카오맵 <br /> 지도를 이용한"
-                description="KakaoMap 지도를 이용한 간편한 관광지 검색 바로가기"
+                description="카카오맵 지도를 이용한 전국 지역별 관광지와 유형별 관광지 검색"
               />
 
               <RotatingCardBack
-                image="@/assets/img/sample_home.png"
-                title="Discover More"
-                description="You will save a lot of time going from prototyping to full-functional
-                  code because all elements are implemented."
+                image="https://velog.velcdn.com/images/rlawogks2468/post/ad73ae1a-a736-4bb8-bf46-4461a47feb60/image.gif"
+                title="클릭해서 바로가기"
+                description=""
                 :action="[
                   {
-                    route: './/sections/page-sections/hero-sections.html',
-                    label: 'Start with Headers',
+                    route: '/trip',
+                    label: 'Click Me',
                   },
                 ]"
               />

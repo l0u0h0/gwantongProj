@@ -2,7 +2,7 @@
 defineProps({
   headers: {
     type: Array,
-    default: () => ["이미지","이름", "주소", "유형", "전화번호"],
+    default: () => ["。","이름", "주소", "유형", "전화번호"],
   },
   rows: {
     type: Array,
