@@ -88,7 +88,7 @@ watch(
     }
   }
 );
-let user = null;
+// let user = null;
 /**
  * 로그인되면 유저 정보 세션에 넣기
  */
