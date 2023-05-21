@@ -18,10 +18,6 @@ defineProps({
       class: "",
     }),
   },
-  value: {
-    type: String,
-    default: "",
-  },
   placeholder: {
     type: String,
     default: "",
@@ -54,6 +50,10 @@ defineProps({
     type: String,
     default: "",
   },
+  modelValue: {
+    type: String,
+    default: "",
+  },
 });
 function getClasses(size, success, error) {
   let sizeValue, isValidValue;
@@ -71,6 +71,11 @@ function getClasses(size, success, error) {
   return `${sizeValue} ${isValidValue}`;
 }
 </script>
+<script>
+export default {
+  emits: ["update:modelValue"],
+};
+</script>
 <template>
   <div class="input-group">
     <label v-if="label" :class="label.class">{{
@@ -84,7 +89,8 @@ function getClasses(size, success, error) {
       :type="type"
       class="form-control"
       :class="[getClasses(size, success, error), inputClass]"
-      :value="value"
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
       :placeholder="placeholder"
       :isRequired="isRequired"
       :disabled="isDisabled"

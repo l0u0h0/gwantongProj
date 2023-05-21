@@ -12,12 +12,40 @@ import MaterialProgress from "@/components/Material/MaterialProgress.vue";
 
 // material-input
 import setMaterialInput from "@/assets/js/material-input";
+
+let percent = 0;
+
 onMounted(() => {
   setMaterialInput();
 });
 const hello = () => {
   alert("회원가입 진행해야함");
   router.push("/");
+};
+</script>
+<script>
+export default {
+  data() {
+    return {
+      percent: 0,
+      name: "",
+      id: "",
+      password: "",
+      email: "",
+    };
+  },
+  watch: {
+    name() {
+      console.log(this.name);
+      this.percent += 20;
+    },
+    id() {
+      if (this.id.length < 8) {
+        this.percent += 20;
+        document.getElementById("id").setAttribute("error", "true");
+      }
+    },
+  },
 };
 </script>
 <template>
@@ -69,6 +97,7 @@ const hello = () => {
               <div class="card-body">
                 <form role="form" class="text-start" onsubmit="return false;">
                   <MaterialInput
+                    v-model.lazy="name"
                     id="name"
                     class="input-group-outline my-3"
                     :label="{
@@ -79,13 +108,14 @@ const hello = () => {
                   />
                   <hr />
                   <MaterialInput
-                    id="email"
+                    v-model.lazy="id"
+                    id="id"
                     class="input-group-outline my-3"
                     :label="{
                       text: '아이디를 입력해주세요.',
                       class: 'form-label',
                     }"
-                    type="email"
+                    type="text"
                   />
                   <MaterialInput
                     id="password"
@@ -152,7 +182,7 @@ const hello = () => {
                     </div>
                   </div>
 
-                  <MaterialProgress color="success" :value="60" />
+                  <MaterialProgress color="success" :value="percent" />
                   <div class="text-center">
                     <MaterialButton
                       class="my-4 mb-2"

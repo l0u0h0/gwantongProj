@@ -51,6 +51,34 @@ onMounted(async () => {
       sel.appendChild(opt);
     });
   }
+  document.getElementById("search-area").addEventListener("selected", () => {
+    let areaCode = document.getElementById("search-area").value;
+    let areaUrl =
+      "https://apis.data.go.kr/B551011/KorService1/areaCode1?serviceKey=" +
+      process.env.VUE_APP_AREA_API_KEY +
+      "&numOfRows=30&pageNo=1&MobileOS=ETC&areaCode=" +
+      areaCode +
+      "&MobileApp=AppTest&_type=json";
+
+    axios.get(areaUrl).then((data) => makeOption(data));
+
+    function makeOption(data) {
+      let areas = data.data.response.body.items.item;
+      console.log(areas);
+      let sel = document.getElementById("search-area-detail");
+
+      sel.innerHTML = '<option value="0" selected>검색 할 지역 선택</option>';
+      areas.forEach((area) => {
+        let opt = document.createElement("option");
+        opt.setAttribute("value", area.code);
+        opt.setAttribute("class", "dropdown-item border-radius-md");
+
+        opt.appendChild(document.createTextNode(area.name));
+
+        sel.appendChild(opt);
+      });
+    }
+  });
 });
 </script>
 <template>
@@ -76,14 +104,21 @@ onMounted(async () => {
 
             <ul
               class="dropdown-menu px-2 py-3"
-              :class="{ show: showDropdownSido }"
+              :class="{ show: showDropdownArea }"
               aria-labelledby="dropdownMenuButton"
             >
               <li>
+                <select id="search-area" class="dropdown-item border-radius-md">
+                  <option value="0" selected>검색 할 시/도 선택</option>
+                </select>
+              </li>
+              <li>
                 <select
-                  id="search-area"
+                  id="search-area-detail"
                   class="dropdown-item border-radius-md"
-                ></select>
+                >
+                  <option value="0" selected>검색 할 구/군 선택</option>
+                </select>
               </li>
             </ul>
           </div>
