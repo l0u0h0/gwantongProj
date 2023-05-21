@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps } from "vue";
 
 defineProps({
   variant: {
@@ -44,13 +44,24 @@ const getColor = (color, variant) => {
   return colorValue;
 };
 </script>
+<script>
+export default {
+  methods: {
+    updated() {
+      this.$emit("updateValue", this.value);
+    },
+  },
+};
+</script>
 <template>
   <div class="progress">
     <div
       class="progress-bar"
       :class="getColor(color, variant)"
       role="progressbar"
-      :style="{ width: `${value}%` }"
+      :style="{ width: `${modelValue}%` }"
+      :value="modelValue"
+      @update="$emit('update:modelValue', $event.target.value)"
       :aria-valuenow="value"
       aria-valuemin="0"
       aria-valuemax="100"

@@ -182,7 +182,11 @@ export default {
                     </div>
                   </div>
 
-                  <MaterialProgress color="success" :value="percent" />
+                  <MaterialProgress
+                    color="success"
+                    :value="percent"
+                    @updateValue="value = $event"
+                  />
                   <div class="text-center">
                     <MaterialButton
                       class="my-4 mb-2"
