@@ -13,8 +13,6 @@ import MaterialProgress from "@/components/Material/MaterialProgress.vue";
 // material-input
 import setMaterialInput from "@/assets/js/material-input";
 
-let percent = 0;
-
 onMounted(() => {
   setMaterialInput();
 });
@@ -31,19 +29,111 @@ export default {
       name: "",
       id: "",
       password: "",
+      password_c: "",
       email: "",
+      area: {
+        sido: "",
+        gugun: "",
+      },
+      check: {
+        name: false,
+        id: false,
+        password: false,
+        email: false,
+        area: false,
+      },
     };
   },
   watch: {
     name() {
-      console.log(this.name);
-      this.percent += 20;
+      if (this.name != null && !this.check.name) {
+        if (this.percent < 100) this.percent += 20;
+        this.check.name = true;
+      } else if (this.name == "" && this.check.name) {
+        if (this.percent > 0) this.percent -= 20;
+        this.check.name = false;
+      }
+      if (!this.check.name) {
+        document.getElementById("id").setAttribute("success", true);
+      } else {
+        document.getElementById("id").setAttribute("error", true);
+      }
     },
     id() {
-      if (this.id.length < 8) {
-        this.percent += 20;
-        document.getElementById("id").setAttribute("error", "true");
+      if (this.id.length >= 8 && !this.check.id) {
+        if (this.percent < 100) this.percent += 20;
+        this.check.id = true;
+      } else if (this.id.length < 8 && this.check.id) {
+        if (this.percent > 0) this.percent -= 20;
+        this.check.id = false;
       }
+    },
+    password() {
+      console.log(this.password);
+      console.log(this.password_c);
+      if (
+        this.password.length >= 8 &&
+        this.password == this.password_c &&
+        !this.check.password
+      ) {
+        if (this.percent < 100) this.percent += 20;
+        this.check.password = true;
+      } else if (this.password.length < 8 && this.check.password) {
+        if (this.percent > 0) this.percent -= 20;
+        this.check.passwrod = false;
+      }
+    },
+    password_c() {
+      console.log(this.area);
+      console.log(this.password_c);
+      if (
+        this.password.length >= 8 &&
+        this.password == this.password_c &&
+        !this.check.password
+      ) {
+        if (this.percent < 100) this.percent += 20;
+        this.check.password = true;
+      } else if (this.password.length < 8 && this.check.password) {
+        if (this.percent > 0) this.percent -= 20;
+        this.check.passwrod = false;
+      }
+    },
+    email() {
+      if (this.email != null && !this.check.email) {
+        if (this.percent < 100) this.percent += 20;
+        this.check.email = true;
+      } else if (this.email == "" && this.check.email) {
+        if (this.percent > 0) this.percent -= 20;
+        this.check.email = false;
+      }
+    },
+    area: {
+      handler: function () {
+        console.log(this.area);
+        if (
+          (this.area.sido == "basicSelect" ||
+            this.area.gugun == "basicSelect") &&
+          this.check.area
+        ) {
+          if (this.percent > 0) this.percent -= 20;
+          if (
+            this.area.sido == "basicSelect" &&
+            this.area.gugun == "basicSelect"
+          )
+            this.check.area = false;
+        } else if (
+          this.area.sido != "" &&
+          this.area.gugun != "" &&
+          !(
+            this.area.sido == "basicSelect" || this.area.gugun == "basicSelect"
+          ) &&
+          !this.check.area
+        ) {
+          if (this.percent < 100) this.percent += 20;
+          this.check.area = true;
+        }
+      },
+      deep: true,
     },
   },
 };
@@ -105,6 +195,7 @@ export default {
                       class: 'form-label',
                     }"
                     type="text"
+                    error
                   />
                   <hr />
                   <MaterialInput
@@ -118,6 +209,7 @@ export default {
                     type="text"
                   />
                   <MaterialInput
+                    v-model.lazy="password"
                     id="password"
                     class="input-group-outline mb-3"
                     :label="{
@@ -127,16 +219,18 @@ export default {
                     type="password"
                   />
                   <MaterialInput
-                    id="password"
+                    v-model="password_c"
+                    id="password_c"
                     class="input-group-outline mb-3"
                     :label="{
-                      text: '비밀번호를 입력해주세요.',
+                      text: '비밀번호를 다시 한번 입력해주세요.',
                       class: 'form-label',
                     }"
                     type="password"
                   />
                   <hr />
                   <MaterialInput
+                    v-model="email"
                     id="email"
                     class="input-group-outline my-3"
                     :label="{
@@ -151,6 +245,7 @@ export default {
                         >시/도</label
                       >
                       <select
+                        v-model="area.sido"
                         class="form-select input-group-outline"
                         id="sido"
                         name="sido"
@@ -168,6 +263,7 @@ export default {
                         >구/군</label
                       >
                       <select
+                        v-model="area.gugun"
                         class="form-select input-group-outline"
                         id="gugun"
                         name="gugun"
@@ -181,11 +277,11 @@ export default {
                       </select>
                     </div>
                   </div>
-
+                  <br />
                   <MaterialProgress
                     color="success"
                     :value="percent"
-                    @updateValue="value = $event"
+                    ref="percent_comp"
                   />
                   <div class="text-center">
                     <MaterialButton

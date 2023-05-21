@@ -44,24 +44,13 @@ const getColor = (color, variant) => {
   return colorValue;
 };
 </script>
-<script>
-export default {
-  methods: {
-    updated() {
-      this.$emit("updateValue", this.value);
-    },
-  },
-};
-</script>
 <template>
   <div class="progress">
     <div
       class="progress-bar"
       :class="getColor(color, variant)"
       role="progressbar"
-      :style="{ width: `${modelValue}%` }"
-      :value="modelValue"
-      @update="$emit('update:modelValue', $event.target.value)"
+      :style="{ width: `${value}%` }"
       :aria-valuenow="value"
       aria-valuemin="0"
       aria-valuemax="100"
