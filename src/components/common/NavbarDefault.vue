@@ -35,6 +35,7 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  user: String,
 });
 
 let textDark = ref(props.darkText);
@@ -56,7 +57,7 @@ watch(
     }
   }
 );
-// let user = null;
+// let user = "hi";
 /**
  * 로그인되면 유저 정보 세션에 넣기
  */
@@ -153,7 +154,7 @@ watch(
           </li>
         </ul>
         <ul
-          v-if="this.user"
+          v-if="user"
           class="header-text navbar-nav navbar-nav-hover ms-3"
         >
           <li class="nav-item dropdown dropdown-hover mx-2">

@@ -62,7 +62,7 @@ onUnmounted(() => {
     <header class="bg-gradient-dark">
       <div
         class="page-header min-vh-50"
-        :style="{ backgroundImage: `url(${bg0})` }"
+        :style="{ backgroundImage: `url(https://wimg.mk.co.kr/meet/neds/2020/12/image_readtop_2020_1263248_16074725144464348.jpg)` }"
       >
         <span class="mask bg-gradient-dark opacity-6"></span>
         <div class="container">

@@ -107,7 +107,7 @@ defineProps({
             href: "https://github.com/suhwan2004"
           },
           {
-            name: "licenses (EULA)",
+            name: "licenses (YouYoung)",
             href: "https://github.com/suhwan2004"
           }
         ]

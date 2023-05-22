@@ -11,9 +11,6 @@ import bg from "@/assets/img/bg9.jpg";
 //dep
 import Typed from "typed.js";
 
-//sections
-import BoardList from "@/components/board/BoardList.vue";
-
 const body = document.getElementsByTagName("body")[0];
 //hooks
 onMounted(() => {
@@ -61,7 +58,7 @@ onUnmounted(() => {
     <header class="bg-gradient-dark">
       <div
         class="page-header min-vh-45"
-        :style="{ backgroundImage: `url(${bg})` }"
+        :style="{ backgroundImage: `url(https://img.sbs.co.kr/newimg/news/20181023/201241495_1280.jpg)` }"
       >
         <span class="mask bg-gradient-dark opacity-8"></span>
         <div class="container">

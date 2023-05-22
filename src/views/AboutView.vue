@@ -17,6 +17,9 @@ import AboutBlock from "@/components/about/AboutBlock.vue";
 import Featuring from "@/components/about/AboutFeaturing.vue";
 
 const body = document.getElementsByTagName("body")[0];
+
+// let user = "test";
+
 //hooks
 onMounted(() => {
   body.classList.add("about-us");
@@ -55,6 +58,8 @@ onUnmounted(() => {
   <div>
     <!-- 로그인 하기 전 상상태 -->
     <DefaultNavbar
+      v-if="!user"
+      :user="user"
       :action="{
         route: '/user/signin',
         label: '로그인',
@@ -63,15 +68,17 @@ onUnmounted(() => {
       :sticky="true"
       :transparent="false"
     />
-    <!-- // 로그인 한 상태
+    <!-- // 로그인 한 상태 -->
     <DefaultNavbar
+      v-else
+      :user="user"
       :action="{
         route: '/user/logout',
         label: '로그아웃',
         color: 'btn-dark',
       }"
       :sticky="true"
-    /> -->
+    />
     <header class="bg-gradient-dark">
       <div
         class="page-header min-vh-75"

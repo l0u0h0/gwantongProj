@@ -179,7 +179,7 @@ export default {
       class="page-header align-items-start min-vh-100"
       :style="{
         backgroundImage:
-          'url(https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80)',
+          'url(https://t1.daumcdn.net/cfile/tistory/231B3F36567F30AC14)',
       }"
       loading="lazy"
     >

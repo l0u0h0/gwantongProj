@@ -13,6 +13,7 @@ import BoardList from "@/components/board/BoardList.vue";
 import BoardDetail from "@/components/board/BoardDetail.vue";
 import BoardWrite from "@/components/board/BoardWrite.vue";
 import BoardModify from "@/components/board/BoardModify.vue";
+import UserMyPage from "@/components/user/UserMyPage.vue";
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
@@ -42,7 +43,7 @@ const router = createRouter({
           // MyPage 구현해야함
           path: "mypage",
           name: "mypage",
-          component: UserSignin,
+          component: UserMyPage,
         },
       ],
     },
@@ -63,7 +64,7 @@ const router = createRouter({
           path: "list",
           name: "list",
           component: BoardList,
-      },
+        },
         {
           path: "boardview/:no",
           name: "boardview",
@@ -78,8 +79,8 @@ const router = createRouter({
           path: "boardmodify/:no",
           name: "boardmodify",
           component: BoardModify,
-        }
-      ]
+        },
+      ],
     },
   ],
 });
