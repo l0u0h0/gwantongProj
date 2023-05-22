@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "KakaoMap",
+  name: "TripMap",
   components: {},
   data() {
     return {
@@ -16,16 +16,16 @@ export default {
     };
   },
   props: {
-    chargers: [],
+    places: [],
   },
   watch: {
-    chargers() {
-      console.log("충전소", this.chargers);
+    places() {
+      console.log("충전소", this.places);
       this.positions = [];
-      this.chargers.forEach((charger) => {
+      this.places.forEach((place) => {
         let obj = {};
-        obj.title = charger.statNm;
-        obj.latlng = new kakao.maps.LatLng(charger.lat, charger.lng);
+        obj.title = place.statNm;
+        obj.latlng = new kakao.maps.LatLng(place.lat, place.lng);
 
         this.positions.push(obj);
       });
@@ -115,6 +115,6 @@ export default {
 <style scoped>
 #map {
   width: 95%;
-  height: 400px;
+  height: 50vh;
 }
 </style>

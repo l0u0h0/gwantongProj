@@ -7,11 +7,11 @@ defineProps({
   rows: {
     type: Array,
     required: true,
-    no: Number,
+    img: String,
     title: String,
-    author: String,
-    date: String,
-    view: Number
+    address: String,
+    type: String,
+    tel: Number
   },
 });
 </script>
@@ -33,46 +33,41 @@ defineProps({
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="(
+                  <tr class="text-center" v-for="(
                           {
-                            no,
+                            img,
                             title,
-                            author,
-                            date,
-                            view,
+                            address,
+                            type,
+                            tel,
                           },
                             index
                         ) of rows" :key="index">
                     <td>
-                      <div class="d-flex px-3 py-2 opacity-9">
+                      <div class="px-3 py-2 opacity-9">
+                        <img v-if="img" src="#" />
+                      </div>
+                    </td>
+                    <td>
+                      <div class="px-3 py-2 opacity-9">
                         <h6 class="mb-0 text-s">
-                          {{ no }}
+                          {{ title }}
                         </h6>
                       </div>
                     </td>
                     <td>
-                      <div class="d-flex px-3 py-2 opacity-9">
-                        <h6 class="mb-0 text-s">
-                          <router-link :to="{ name: 'boardview', params: { no: no } }" data-toggle="tooltip"
-                            data-original-title="Edit user">
-                            {{ title }}
-                          </router-link>
-                        </h6>
+                      <div class="px-3 py-2 opacity-9">
+                        <h6 class="mb-0 text-s">{{ address }}</h6>
                       </div>
                     </td>
                     <td>
-                      <div class="d-flex px-3 py-2 opacity-9">
-                        <h6 class="mb-0 text-s">{{ author }}</h6>
+                      <div class="px-3 py-2 opacity-9">
+                        <h6 class="mb-0 text-s">{{ type }}</h6>
                       </div>
                     </td>
                     <td>
-                      <div class="d-flex px-3 py-2 opacity-9">
-                        <h6 class="mb-0 text-s">{{ date }}</h6>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="d-flex px-3 py-2 opacity-9">
-                        <h6 class="mb-0 text-s">{{ view }}</h6>
+                      <div class="px-3 py-2 opacity-9">
+                        <h6 class="mb-0 text-s">{{ tel }}</h6>
                       </div>
                     </td>
                   </tr>

@@ -16,8 +16,6 @@ import TripList from "@/components/trip/TripList.vue";
 
 const body = document.getElementsByTagName("body")[0];
 
-let chargers = ['a','b'];
-
 //hooks
 onMounted(() => {
   body.classList.add("about-us");
@@ -26,7 +24,7 @@ onMounted(() => {
   if (document.getElementById("typed")) {
     // eslint-disable-next-line no-unused-vars
     var typeds = new Typed("#typed", {
-      stringsElement: "#typed-strings-s",
+      stringsElement: "#typed-strings",
       typeSpeed: 90,
       backSpeed: 90,
       backDelay: 200,
@@ -63,7 +61,7 @@ onUnmounted(() => {
     /> -->
     <header class="bg-gradient-dark">
       <div
-        class="page-header min-vh-55"
+        class="page-header min-vh-50"
         :style="{ backgroundImage: `url(${bg0})` }"
       >
         <span class="mask bg-gradient-dark opacity-6"></span>
@@ -73,7 +71,7 @@ onUnmounted(() => {
               <h1 class="text-white">
                 <span class="text-white" id="typed"></span> 관광지
               </h1>
-              <div id="typed-strings-s">
+              <div id="typed-strings">
                 <h1>지역별</h1>
                 <h1>유형별</h1>
               </div>
@@ -84,7 +82,7 @@ onUnmounted(() => {
       </div>
     </header>
     <div class="card card-body shadow-xl mx-3 mx-md-4 mt-n6">
-      <TripList :chargers="chargers" />
+      <TripList />
     </div>
     <DefaultFooter />
   </div>

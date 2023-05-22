@@ -11,18 +11,33 @@ import Table from "@/components/common/tables/TripTable.vue";
 let showDropdownArea = ref(false);
 let showDropdownType = ref(false);
 
-let area_val = 0;
-let area_detail_val = 0;
-let content_id_val = 0;
+const tableDatas = [
+  {
+    img: "#",
+    title: "제주공항",
+    address: "제주시 1번가",
+    type: "관광지",
+    tel: "010-2067-9786"
+  },
+]
 
-const charger = [];
+let datas = null;
 
-function setAreaVal(code) {
-  console.log(code);
-}
+const search = () => {
+  let areaCode = document.getElementById("search-area").value;
+  let areaDetailCode = document.getElementById("search-area-detail").value;
+  let contentTypeId = document.getElementById("search-content-id").value;
+  console.log(areaCode);
+  console.log(areaDetailCode);
 
-function test() {
-  console.log("hi");
+  if (parseInt(areaCode)) searchUrl += `&areaCode=${areaCode}`;
+  if (parseInt(areadetailCode))
+    searchUrl += `&sigunguCode=${areadetailCode}`;
+  if (parseInt(contentTypeId))
+    searchUrl += `&contentTypeId=${contentTypeId}`;
+
+  // axios.get(searchUrl)
+  //   .then((data) => datas = data.data.response.items.item);
 }
 
 onMounted(async () => {
@@ -38,12 +53,6 @@ onMounted(async () => {
 
     let sel = document.getElementById("search-area");
     areas.forEach((area) => {
-      // let li = document.createElement("li");
-      // let opt = document.createElement("button");
-      // opt.setAttribute("id", `${area.code}`);
-      // opt.appendChild(document.createTextNode(area.name));
-      // li.appendChild(opt);
-      // sel.appendChild(li);
       let opt = document.createElement("option");
       opt.setAttribute("value", area.code);
       opt.setAttribute("class", "dropdown-item border-radius-md");
@@ -51,7 +60,7 @@ onMounted(async () => {
       sel.appendChild(opt);
     });
   }
-  document.getElementById("search-area").addEventListener("selected", () => {
+  document.getElementById("search-area").addEventListener("click", () => {
     let areaCode = document.getElementById("search-area").value;
     let areaUrl =
       "https://apis.data.go.kr/B551011/KorService1/areaCode1?serviceKey=" +
@@ -67,7 +76,7 @@ onMounted(async () => {
       console.log(areas);
       let sel = document.getElementById("search-area-detail");
 
-      sel.innerHTML = '<option value="0" selected>검색 할 지역 선택</option>';
+      sel.innerHTML = '<option value="0" selected>검색 할 구/군 선택</option>';
       areas.forEach((area) => {
         let opt = document.createElement("option");
         opt.setAttribute("value", area.code);
@@ -90,9 +99,10 @@ onMounted(async () => {
           <div class="dropdown mt-n3">
             <MaterialButton
               variant="gradient"
-              color="dark"
+              color="secondary"
               class="dropdown-toggle"
               :class="{ show: showDropdownArea }"
+              fullWidth
               @focusout="showDropdownArea = false"
               id="dropdownMenuButton"
               data-bs-toggle="dropdown"
@@ -125,9 +135,10 @@ onMounted(async () => {
           <div class="dropdown mt-3">
             <MaterialButton
               variant="gradient"
-              color="dark"
+              color="secondary"
               class="dropdown-toggle"
               :class="{ show: showDropdownType }"
+              fullWidth
               @focusout="showDropdownType = false"
               id="dropdownMenuButton"
               data-bs-toggle="dropdown"
@@ -184,10 +195,22 @@ onMounted(async () => {
               </li>
             </ul>
           </div>
+          <div>
+            <MaterialButton
+              variant="gradient"
+              color="dark"
+              class="mt-3"
+              fullWidth
+              size="lg"
+              @click="search()"
+            >
+              Search
+            </MaterialButton>
+          </div>
         </div>
         <div class="col-lg-9 ms-auto mt-lg-0">
           <div class="position-relative">
-            <trip-map class="mt-4" :chargers="charger"></trip-map>
+            <trip-map class="mb-4" :places="datas"></trip-map>
           </div>
         </div>
       </div>
@@ -197,7 +220,7 @@ onMounted(async () => {
         ~ 관광지 리스트 ~
       </div>
       <!-- List Table 들어갈 자리 -->
-      <Table class="mt-n5 pb-6" v-bind="tableData" />
+      <Table class="mt-n5 pb-6" :rows="datas != null ? datas : tableDatas" />
     </div>
   </section>
 </template>

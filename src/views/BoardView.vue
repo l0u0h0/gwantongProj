@@ -60,7 +60,7 @@ onUnmounted(() => {
     /> -->
     <header class="bg-gradient-dark">
       <div
-        class="page-header min-vh-55"
+        class="page-header min-vh-45"
         :style="{ backgroundImage: `url(${bg})` }"
       >
         <span class="mask bg-gradient-dark opacity-8"></span>
@@ -68,14 +68,11 @@ onUnmounted(() => {
           <div class="row justify-content-center">
             <div class="col-lg-8 text-center mx-auto my-auto">
               <h1 class="text-white">
-                Hello World! <span class="text-white" id="typed"></span>
+                <span class="text-white" id="typed"></span>
               </h1>
               <div id="typed-strings">
-                <h1>Park</h1>
-                <h1>Ji</h1>
-                <h1>Young</h1>
+                <h1>게시판</h1>
               </div>
-              <p class="lead mb-4 text-white opacity-8">== 게시판 페이지 ==</p>
             </div>
           </div>
         </div>
