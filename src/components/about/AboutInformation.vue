@@ -45,20 +45,20 @@ import RotatingCard from "../common/cards/rotatingCards/RotatingCard.vue";
           >
             <RotatingCard>
               <RotatingCardFront
-                image="https://img.etnews.com/photonews/2208/1567328_20220830181242_354_0001.jpg"
+                image="https://velog.velcdn.com/images/rlawogks2468/post/ad73ae1a-a736-4bb8-bf46-4461a47feb60/image.gif"
                 icon="touch_app"
                 title="카카오맵 <br /> 지도를 이용한"
                 description="카카오맵 지도를 이용한 전국 지역별 관광지와 유형별 관광지 검색"
               />
 
               <RotatingCardBack
-                image="https://velog.velcdn.com/images/rlawogks2468/post/ad73ae1a-a736-4bb8-bf46-4461a47feb60/image.gif"
-                title="클릭해서 바로가기"
+                image="https://t1.kakaocdn.net/kakaocorp/corp_thumbnail/Kakao.png"
+                title=""
                 description=""
                 :action="[
                   {
                     route: '/trip',
-                    label: 'Click Me',
+                    label: '관광지 검색',
                   },
                 ]"
               />

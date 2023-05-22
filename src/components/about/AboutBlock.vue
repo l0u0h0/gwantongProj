@@ -1,6 +1,6 @@
 <script>
 // component
-import TheRainView from "@/components/TheRainView.vue";
+import TheRainView from "@/components/about/TheRainView.vue";
 
 export default {
   components: { TheRainView },
