@@ -21,6 +21,43 @@ const Login = () => {
   router.push("/");
 };
 </script>
+<script>
+export default {
+  data() {
+    return {
+      id: "",
+      password: "",
+      percent: 0,
+      check: {
+        id: false,
+        password: false,
+      }
+    }
+  },
+  watch: {
+    id() {
+      if (this.id.length > 0 && !this.check.id) {
+        this.percent += 5;
+        this.check.id = true;
+      } else if (this.id == "" && this.check.id) {
+        this.percent -= 5;
+        this.check.id = false;
+      }
+    },
+    password() {
+      console.log(this.percent);
+      if (this.password.length > 0 && !this.check.password) {
+        this.percent += 5;
+        this.check.password = true;
+      } else if (this.password == "" && this.check.password) {
+        this.percent -= 5;
+        this.check.password = false;
+      }
+    }
+  }
+}
+</script>
+
 <template>
   <nav
     class="navbar navbar-expand-lg top-0 z-index-3 w-100 shadow-none navbar-transparent position-absolute my-3"
@@ -67,6 +104,7 @@ const Login = () => {
               <div class="card-body">
                 <form role="form" class="text-start">
                   <MaterialInput
+                  v-model="id"
                     id="email"
                     class="input-group-outline my-3"
                     :label="{
@@ -76,6 +114,7 @@ const Login = () => {
                     type="email"
                   />
                   <MaterialInput
+                    v-model="password"
                     id="password"
                     class="input-group-outline mb-3"
                     :label="{
@@ -98,6 +137,7 @@ const Login = () => {
                       variant="gradient"
                       color="secondary"
                       fullWidth
+                      :disabled="percent != 10"
                       @click="Login()"
                       >로그인</MaterialButton
                     >

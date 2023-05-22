@@ -25,9 +25,6 @@ const reset = () => {
               <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">
                 글작성하기
               </h4>
-              <div class="row mt-1">
-                <h6 class="text-white text-center mt-0 mb-0">KimSuHwan</h6>
-              </div>
             </div>
           </div>
           <div class="card-body">
@@ -49,7 +46,7 @@ const reset = () => {
               <label for="content" class="text-dark mb-n5">내용</label>
               <MaterialTextArea id="content" class="input-group-outline my-3" :label="{
                 class: 'form-label',
-              }">내용을 입력해주세요.</MaterialTextArea>
+              }" placeholder="내용을 입력해주세요."></MaterialTextArea>
               <hr />
 
               <div class="text-center d-flex">

@@ -58,7 +58,7 @@ onUnmounted(() => {
       :action="{
         route: '/user/signin',
         label: '로그인',
-        color: 'btn-secondary',
+        color: 'btn-dark',
       }"
       :sticky="true"
       :transparent="false"
@@ -68,7 +68,7 @@ onUnmounted(() => {
       :action="{
         route: '/user/logout',
         label: '로그아웃',
-        color: 'btn-secondary',
+        color: 'btn-dark',
       }"
       :sticky="true"
     /> -->

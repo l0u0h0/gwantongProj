@@ -33,7 +33,7 @@ defineProps({
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="text-center" v-for="(
+                  <tr class="text-center col" v-for="(
                           {
                             img,
                             title,
@@ -45,7 +45,7 @@ defineProps({
                         ) of rows" :key="index">
                     <td>
                       <div class="px-3 py-2 opacity-9">
-                        <img v-if="img" src="#" />
+                        <img :src="img" :alt="title+'img'" class="w-70" />
                       </div>
                     </td>
                     <td>

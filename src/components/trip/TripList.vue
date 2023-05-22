@@ -13,7 +13,7 @@ let showDropdownType = ref(false);
 
 const tableDatas = [
   {
-    img: "#",
+    img: "http://tong.visitkorea.or.kr/cms/resource/21/2657021_image2_1.jpg",
     title: "제주공항",
     address: "제주시 1번가",
     type: "관광지",
@@ -94,8 +94,8 @@ onMounted(async () => {
   <section class="py-7">
     <div class="container">
       <div class="row align-items-center">
-        <div class="row col-lg-3 text-center">
-          <h3 class="mt-n6">Filter</h3>
+        <div class="row col-lg-2 text-center">
+          <h2 class="text-sans-serif mt-n6">Filter</h2>
           <div class="dropdown mt-n1">
             <MaterialButton
               variant="gradient"
