@@ -3,11 +3,6 @@ import { RouterLink } from "vue-router";
 import { ref, watch, defineProps } from "vue";
 import { useWindowsWidth } from "../../assets/js/useWindowsWidth";
 
-// images
-// import ArrDark from "@/assets/img/down-arrow-dark.svg";
-// import downArrow from "@/assets/img/down-arrow.svg";
-// import DownArrWhite from "@/assets/img/down-arrow-white.svg";
-
 const props = defineProps({
   action: {
     type: Object,
@@ -41,33 +36,6 @@ const props = defineProps({
     default: false,
   },
 });
-
-// set arrow  color
-// function getArrowColor() {
-//   if (props.transparent && textDark.value) {
-//     return ArrDark;
-//   } else if (props.transparent) {
-//     return DownArrWhite;
-//   } else {
-//     return ArrDark;
-//   }
-// }
-
-// // set text color
-// const getTextColor = () => {
-//   let color;
-//   if (props.transparent && textDark.value) {
-//     color = "text-dark";
-//   } else if (props.transparent) {
-//     color = "text-white";
-//   } else {
-//     color = "text-dark";
-//   }
-
-//   return color;
-// };
-
-// set nav color on mobile && desktop
 
 let textDark = ref(props.darkText);
 const { type } = useWindowsWidth();
@@ -121,7 +89,7 @@ watch(
         ]"
         :to="{ name: 'about' }"
         rel="tooltip"
-        title="Designed and Coded by Creative Tim"
+        title="Designed and Coded by DAMP"
         data-placement="bottom"
       >
         <img class="damp_logo" src="@/assets/img/logo_damp.png" />
@@ -135,7 +103,7 @@ watch(
         "
         :to="{ name: 'about' }"
         rel="tooltip"
-        title="Designed and Coded by Creative Tim"
+        title="Designed and Coded by DAMP"
         data-placement="bottom"
       >
         <img class="damp_logo_mobile" src="@/assets/img/logo_damp.png" />
@@ -168,12 +136,12 @@ watch(
             </router-link>
           </li>
           <li class="nav-item dropdown dropdown-hover mx-2">
-            <a
-              href="#"
+            <router-link
+              :to="{ name: 'about' }"
               class="nav-link d-flex cursor-pointer align-items-center"
             >
               나의 여행계획
-            </a>
+            </router-link>
           </li>
           <li class="nav-item dropdown dropdown-hover mx-2">
             <router-link
@@ -189,19 +157,18 @@ watch(
           class="header-text navbar-nav navbar-nav-hover ms-3"
         >
           <li class="nav-item dropdown dropdown-hover mx-2">
-            <a
-              href="#"
+            <router-link
               class="nav-link d-flex cursor-pointer align-items-center"
+              :to="{ name: 'mypage' }"
             >
               내 정보
-            </a>
+            </router-link>
           </li>
           <li class="nav-item">
             <a
               :href="action.route"
-              class="btn btn-sm mb-0"
+              class="btn btn-sm mb-0 font-size-lg"
               :class="action.color"
-              onclick="smoothToPricing('pricing-soft-ui')"
               >{{ action.label }}</a
             >
           </li>

@@ -54,9 +54,9 @@ export default {
         this.check.name = false;
       }
       if (!this.check.name) {
-        document.getElementById("id").setAttribute("success", true);
+        document.getElementById("name").setAttribute("class", "input-group-outline my-3 is-valid");
       } else {
-        document.getElementById("id").setAttribute("error", true);
+        document.getElementById("name").setAttribute("class", "input-group-outline my-3 is-invalid");
       }
     },
     id() {
@@ -195,7 +195,6 @@ export default {
                       class: 'form-label',
                     }"
                     type="text"
-                    error
                   />
                   <hr />
                   <MaterialInput

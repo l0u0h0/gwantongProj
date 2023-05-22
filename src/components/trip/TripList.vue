@@ -95,14 +95,15 @@ onMounted(async () => {
     <div class="container">
       <div class="row align-items-center">
         <div class="row col-lg-3 text-center">
-          <h4 class="mt-n6">Filter</h4>
-          <div class="dropdown mt-n3">
+          <h3 class="mt-n6">Filter</h3>
+          <div class="dropdown mt-n1">
             <MaterialButton
               variant="gradient"
               color="secondary"
               class="dropdown-toggle"
               :class="{ show: showDropdownArea }"
               fullWidth
+              size="lg"
               @focusout="showDropdownArea = false"
               id="dropdownMenuButton"
               data-bs-toggle="dropdown"
@@ -139,6 +140,7 @@ onMounted(async () => {
               class="dropdown-toggle"
               :class="{ show: showDropdownType }"
               fullWidth
+              size="lg"
               @focusout="showDropdownType = false"
               id="dropdownMenuButton"
               data-bs-toggle="dropdown"
@@ -197,7 +199,6 @@ onMounted(async () => {
           </div>
           <div>
             <MaterialButton
-              variant="gradient"
               color="dark"
               class="mt-3"
               fullWidth
@@ -215,7 +216,7 @@ onMounted(async () => {
         </div>
       </div>
       <div
-        class="h4 bg-gradient-secondary mx-6 mt-5 py-2 shadow-dark border-radius-lg text-white text-center"
+        class="h4 mx-6 mt-5 py-3 shadow-dark bg-gradient-info border-radius-lg text-white text-center"
       >
         ~ 관광지 리스트 ~
       </div>
