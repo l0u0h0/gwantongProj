@@ -53,10 +53,10 @@ export default {
         if (this.percent > 0) this.percent -= 20;
         this.check.name = false;
       }
-      if (!this.check.name) {
-        document.getElementById("name").setAttribute("class", "input-group-outline my-3 is-valid");
+      if (this.check.name) {
+        document.getElementById("namediv").setAttribute("class", "input-group input-group-outline my-3 is-valid");
       } else {
-        document.getElementById("name").setAttribute("class", "input-group-outline my-3 is-invalid");
+        document.getElementById("namediv").setAttribute("class", "input-group input-group-outline my-3 is-invalid");
       }
     },
     id() {
@@ -66,6 +66,11 @@ export default {
       } else if (this.id.length < 8 && this.check.id) {
         if (this.percent > 0) this.percent -= 20;
         this.check.id = false;
+      }
+      if (this.check.id) {
+        document.getElementById("iddiv").setAttribute("class", "input-group input-group-outline my-3 is-valid");
+      } else {
+        document.getElementById("iddiv").setAttribute("class", "input-group input-group-outline my-3 is-invalid");
       }
     },
     password() {
@@ -82,6 +87,11 @@ export default {
         if (this.percent > 0) this.percent -= 20;
         this.check.passwrod = false;
       }
+      if (this.check.password) {
+        document.getElementById("passworddiv").setAttribute("class", "input-group input-group-outline my-3 is-valid");
+      } else {
+        document.getElementById("passworddiv").setAttribute("class", "input-group input-group-outline my-3 is-invalid");
+      }
     },
     password_c() {
       console.log(this.area);
@@ -97,6 +107,11 @@ export default {
         if (this.percent > 0) this.percent -= 20;
         this.check.passwrod = false;
       }
+      if (this.check.password) {
+        document.getElementById("passworddiv").setAttribute("class", "input-group input-group-outline my-3 is-valid");
+      } else {
+        document.getElementById("passworddiv").setAttribute("class", "input-group input-group-outline my-3 is-invalid");
+      }
     },
     email() {
       if (this.email != null && !this.check.email) {
@@ -105,6 +120,11 @@ export default {
       } else if (this.email == "" && this.check.email) {
         if (this.percent > 0) this.percent -= 20;
         this.check.email = false;
+      }
+      if (this.check.email) {
+        document.getElementById("emaildiv").setAttribute("class", "input-group input-group-outline my-3 is-valid");
+      } else {
+        document.getElementById("emaildiv").setAttribute("class", "input-group input-group-outline my-3 is-invalid");
       }
     },
     area: {
@@ -195,6 +215,7 @@ export default {
                       class: 'form-label',
                     }"
                     type="text"
+                    ref="name"
                   />
                   <hr />
                   <MaterialInput
@@ -289,6 +310,7 @@ export default {
                       color="secondary"
                       size="lg"
                       fullWidth
+                      :disabled="percent != 100"
                       @click="hello()"
                       >회원가입</MaterialButton
                     >
