@@ -23,7 +23,7 @@ async function memberModify(user, success, fail) {
     .catch(fail);
 }
 
-async function memberDelete(id, success, fail) {
+async function memberDelete(success, fail) {
   await api.get(`/deleteMember`).then(success).catch(fail);
 }
 

@@ -1,33 +1,23 @@
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 import {
-  Login,
-  Logout,
-  memberInsert,
-  memberModify,
-  memberDelete,
-} from "@/service/user";
+  getGugun,
+  getSido,
+  searchByType,
+  searchByaddress,
+} from "@/service/area";
 
-export const useUserStore = defineStore("user", () => {
-  const userid = ref("default");
-  const userpw = ref("");
+export const useAreaStore = defineStore("area", () => {
+  let sidoList = ref([{}]);
+  let gugunList = ref([{}]);
 
-  const testUser = computed(() => userid.value + " " + userpw.value);
-
-  function testSetUser(getId, getPw) {
-    userid.value = getId;
-    userpw.value = getPw;
-  }
-
-  function Login(id, pw) {
-    const user = { id, pw };
-    login(
-      user,
+  function GetSido() {
+    getSido(
       (data) => {
-        if (data.message === "ok") {
-          // 로그인 성공
+        if (data.message === "OK") {
+          // 시도 데이터 가져오기 성공
         } else {
-          // 로그인 실패
+          // 시도 데이터 가져오기 실패
         }
       },
       (error) => {
@@ -35,14 +25,14 @@ export const useUserStore = defineStore("user", () => {
       }
     );
   }
-  function Logout(id) {
-    logout(
-      id,
+  function GetGugun(sido) {
+    getGugun(
+      sido,
       (data) => {
-        if (data.message === "ok") {
-          // 로그아웃 성공
+        if (data.message === "OK") {
+          // 구/군 데이터 가져오기 성공
         } else {
-          // 로그아웃 실패
+          // 구/군 데이터 가져오기 실패
         }
       },
       (error) => {
@@ -50,15 +40,15 @@ export const useUserStore = defineStore("user", () => {
       }
     );
   }
-  function MemberInsert(name, id, pw, email, area) {
-    const user = { name, id, pw, email, area };
-    memberInsert(
-      user,
+  function SearchByAddress(sido, gugun) {
+    const area = { sido, gugun };
+    searchByaddress(
+      area,
       (data) => {
-        if (data.message === "ok") {
-          // 회원가입 성공
+        if (data.message === "OK") {
+          // 지역 검색 성공
         } else {
-          // 회원가입 실패
+          // 지역 검색 실패
         }
       },
       (error) => {
@@ -66,30 +56,14 @@ export const useUserStore = defineStore("user", () => {
       }
     );
   }
-  function MemberModify(name, id, pw, email, area) {
-    const user = { name, id, pw, email, area };
-    memberModify(
-      user,
+  function SearchByType(type) {
+    searchByType(
+      type,
       (data) => {
-        if (data.message === "ok") {
-          // 회원수정 성공
+        if (data.message === "OK") {
+          // 유형 검색 성공
         } else {
-          // 회원수정 실패
-        }
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
-  }
-  function MemberDelete(id) {
-    memberDelete(
-      id,
-      (data) => {
-        if (data.message === "ok") {
-          // 회원탈퇴 성공
-        } else {
-          // 회원탈퇴 실패
+          // 유형 검색 실패
         }
       },
       (error) => {
@@ -99,14 +73,11 @@ export const useUserStore = defineStore("user", () => {
   }
 
   return {
-    userid,
-    userpw,
-    testUser,
-    testSetUser,
-    Login,
-    Logout,
-    MemberInsert,
-    MemberModify,
-    MemberDelete,
+    sidoList,
+    gugunList,
+    GetSido,
+    GetGugun,
+    SearchByAddress,
+    SearchByType,
   };
 });
