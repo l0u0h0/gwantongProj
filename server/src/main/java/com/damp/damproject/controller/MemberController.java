@@ -90,7 +90,7 @@ public class MemberController {
 		}
 	}
 	
-	@PostMapping("deleteMember")
+	@GetMapping("deleteMember")
 	@ResponseBody
 	public String deleteMember(HttpServletRequest request){
 		HttpSession session = request.getSession(false);
