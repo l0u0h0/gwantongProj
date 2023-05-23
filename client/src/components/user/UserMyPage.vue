@@ -64,7 +64,7 @@ export default {
     return {
       percent: 0,
       name: "",
-      id: "",
+      id: "default",
       password: "",
       email: "",
       area: {
@@ -177,9 +177,9 @@ export default {
               <hr />
               <p class="lead">userid</p>
               <MaterialInput v-model.lazy="id" id="id" class="input-group-outline my-3" :label="{
-                text: '아이디를 입력해주세요.',
+                text: ``,
                 class: 'form-label',
-              }" type="text" />
+              }" type="text" is-disabled="true" />
               <hr />
               <p class="lead">userpassword</p>
               <MaterialInput

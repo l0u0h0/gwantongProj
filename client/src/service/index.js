@@ -1,6 +1,6 @@
 import axios from "axios";
 
-function getApi() {
+function getServerApi() {
   const instance = axios.create({
     // env 로 빼야하나?
     baseURL: "http://localhost:8080",
@@ -11,6 +11,4 @@ function getApi() {
   return instance;
 }
 
-// 관광지 공공데이터 API 사용하나? 전에 디비로 연동하지 않았나?
-
-export { getApi };
+export { getServerApi };
