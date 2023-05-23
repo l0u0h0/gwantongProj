@@ -26,6 +26,8 @@ public class MemberController {
 	public String login(MemberVO member, HttpServletResponse response, HttpServletRequest request){
 		try {
 			member = memberService.login(member);
+			if (member == null) return "FAIL";
+			
 			HttpSession session = request.getSession();
 			session.setAttribute("member", member);
 			
