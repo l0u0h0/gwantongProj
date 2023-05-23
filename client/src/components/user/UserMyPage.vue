@@ -21,11 +21,14 @@ import Typed from "typed.js";
 // pinia
 import { useUserStore } from "@/store/modules/userStore";
 
+// import TripService
+import { getSido, getGugun } from "@/service/area";
+
 const store = useUserStore();
 
 const body = document.getElementsByTagName("body")[0];
 //hooks
-onMounted(() => {
+onMounted(async () => {
   body.classList.add("about-us");
   body.classList.add("bg-gray-200");
 
@@ -42,17 +45,59 @@ onMounted(() => {
       loop: true,
     });
   }
+
+  await getSido(
+    (data) => {
+      makeOption(data);
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
+
+  function makeOption(data) {
+    const areas = data.data.response.body.items.item;
+
+    let sel = document.getElementById("search-area");
+    areas.forEach((area) => {
+      let opt = document.createElement("option");
+      opt.setAttribute("value", area.code);
+      opt.setAttribute("class", "dropdown-item border-radius-md");
+      opt.appendChild(document.createTextNode(area.name));
+      sel.appendChild(opt);
+    });
+  }
+  document.getElementById("search-area").addEventListener("click", () => {
+    let areaCode = document.getElementById("search-area").value;
+
+    getGugun(
+      areaCode,
+      (data) => {
+        makeOption(data);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+
+    function makeOption(data) {
+      let areas = data.data.response.body.items.item;
+      console.log(areas);
+      let sel = document.getElementById("search-area-detail");
+
+      sel.innerHTML = '<option value="0" selected>검색 할 구/군 선택</option>';
+      areas.forEach((area) => {
+        let opt = document.createElement("option");
+        opt.setAttribute("value", area.code);
+        opt.setAttribute("class", "dropdown-item border-radius-md");
+
+        opt.appendChild(document.createTextNode(area.name));
+
+        sel.appendChild(opt);
+      });
+    }
+  });
 });
-
-const deleteUser = () => {
-  alert("회원탈퇴 진행해야함");
-  router.push("/");
-};
-
-const modifyUser = () => {
-  alert("회원수정 진행해야함");
-  router.push("/");
-};
 
 onUnmounted(() => {
   body.classList.remove("about-us");
@@ -277,31 +322,19 @@ export default {
               />
               <div class="form-group d-flex justify-content-between">
                 <div class="col m-2">
-                  <label class="input-group text-dark" for="sido">시/도</label>
                   <select
-                    v-model="area.sido"
-                    class="form-select input-group-outline"
-                    id="sido"
-                    name="sido"
+                    id="search-area"
+                    class="dropdown-item border-radius-md"
                   >
-                    <option selected value="basicSelect">선택하기...</option>
-                    <option value="1">서울특별시</option>
-                    <option value="2">대구특별시</option>
-                    <option value="3">제주특별시</option>
+                    <option value="0" selected>검색 할 시/도 선택</option>
                   </select>
                 </div>
                 <div class="col m-2">
-                  <label class="input-group text-dark" for="gugun">구/군</label>
                   <select
-                    v-model="area.gugun"
-                    class="form-select input-group-outline"
-                    id="gugun"
-                    name="gugun"
+                    id="search-area-detail"
+                    class="dropdown-item border-radius-md"
                   >
-                    <option selected value="basicSelect">선택하기...</option>
-                    <option value="1">강동구</option>
-                    <option value="2">남양군</option>
-                    <option value="3">시흥군</option>
+                    <option value="0" selected>검색 할 구/군 선택</option>
                   </select>
                 </div>
               </div>

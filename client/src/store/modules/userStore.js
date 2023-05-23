@@ -11,7 +11,7 @@ import {
 } from "@/service/user";
 
 export const useUserStore = defineStore("user", () => {
-  const userid = ref("default");
+  const userid = ref("");
   const userpw = ref("");
 
   const testUser = computed(() => userid.value + " " + userpw.value);
@@ -31,6 +31,7 @@ export const useUserStore = defineStore("user", () => {
           // data.response.getCookies??
         } else {
           // 로그인 실패
+          alert("로그인 실패!!");
         }
       },
       (error) => {
@@ -43,8 +44,11 @@ export const useUserStore = defineStore("user", () => {
       (data) => {
         if (data.message === "OK") {
           // 로그아웃 성공
+          localStorage.removeItem("token");
+          router.push("/");
         } else {
           // 로그아웃 실패
+          alert("로그아웃 실패!!");
         }
       },
       (error) => {
@@ -59,10 +63,11 @@ export const useUserStore = defineStore("user", () => {
       (data) => {
         if (data.message === "OK") {
           // 회원가입 성공
-
+          alert("회원가입 성공!!");
           router.push("/");
         } else {
           // 회원가입 실패
+          alert("회원가입 실패!!");
         }
       },
       (error) => {
@@ -77,8 +82,11 @@ export const useUserStore = defineStore("user", () => {
       (data) => {
         if (data.message === "OK") {
           // 회원수정 성공
+          alert("회원 정보 수정 성공!!");
+          router.push("/user/mypage");
         } else {
           // 회원수정 실패
+          alert("회원 정보 수정 실패!!");
         }
       },
       (error) => {
@@ -89,10 +97,13 @@ export const useUserStore = defineStore("user", () => {
   function MemberDelete() {
     memberDelete(
       (data) => {
-        if (data.message === "ok") {
+        if (data.message === "OK") {
           // 회원탈퇴 성공
+          alert("회원 탈퇴 성공!!");
+          Logout();
         } else {
           // 회원탈퇴 실패
+          alert("회원 탈퇴 실패!!");
         }
       },
       (error) => {

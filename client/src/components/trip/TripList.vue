@@ -10,6 +10,14 @@ import MaterialButton from "@/components/Material/MaterialButton.vue";
 // listTable import
 import Table from "@/components/common/tables/TripTable.vue";
 
+// import TripService
+import {
+  getSido,
+  getGugun,
+  searchByaddress,
+  searchByType,
+} from "@/service/area";
+
 // 드롭다운 상태 변수 생성
 let showDropdownArea = ref(false);
 let showDropdownType = ref(false);
@@ -21,16 +29,16 @@ const tableDatas = [
     title: "제주공항",
     address: "제주시 1번가",
     type: "관광지",
-    tel: "010-2067-9786"
+    tel: "010-2067-9786",
   },
   {
     img: "http://tong.visitkorea.or.kr/cms/resource/21/2657021_image2_1.jpg",
     title: "제주공항",
     address: "제주시 1번가",
     type: "관광지",
-    tel: "010-2067-9786"
+    tel: "010-2067-9786",
   },
-]
+];
 
 let datas = null;
 
@@ -42,15 +50,24 @@ const search = () => {
 
   // axios.get(searchUrl)
   //   .then((data) => datas = data.data.response.items.item);
-}
+};
 
 onMounted(async () => {
-  const areaUrl =
-    "https://apis.data.go.kr/B551011/KorService1/areaCode1?serviceKey=" +
-    process.env.VUE_APP_AREA_API_KEY +
-    "&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json";
+  // const areaUrl =
+  //   "https://apis.data.go.kr/B551011/KorService1/areaCode1?serviceKey=" +
+  //   process.env.VUE_APP_AREA_API_KEY +
+  //   "&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json";
 
-  await axios.get(areaUrl).then((data) => makeOption(data));
+  // await axios.get(areaUrl).then((data) => makeOption(data));
+
+  await getSido(
+    (data) => {
+      makeOption(data);
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
 
   function makeOption(data) {
     const areas = data.data.response.body.items.item;
@@ -66,14 +83,24 @@ onMounted(async () => {
   }
   document.getElementById("search-area").addEventListener("click", () => {
     let areaCode = document.getElementById("search-area").value;
-    let areaUrl =
-      "https://apis.data.go.kr/B551011/KorService1/areaCode1?serviceKey=" +
-      process.env.VUE_APP_AREA_API_KEY +
-      "&numOfRows=30&pageNo=1&MobileOS=ETC&areaCode=" +
-      areaCode +
-      "&MobileApp=AppTest&_type=json";
+    // let areaUrl =
+    //   "https://apis.data.go.kr/B551011/KorService1/areaCode1?serviceKey=" +
+    //   process.env.VUE_APP_AREA_API_KEY +
+    //   "&numOfRows=30&pageNo=1&MobileOS=ETC&areaCode=" +
+    //   areaCode +
+    //   "&MobileApp=AppTest&_type=json";
 
-    axios.get(areaUrl).then((data) => makeOption(data));
+    // axios.get(areaUrl).then((data) => makeOption(data));
+
+    getGugun(
+      areaCode,
+      (data) => {
+        makeOption(data);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
 
     function makeOption(data) {
       let areas = data.data.response.body.items.item;
