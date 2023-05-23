@@ -23,10 +23,10 @@ public class MemberSecureDAO {
 		try {
 			con = DBUtil.getConnection(url, user, password);
 			
-			String sql = "select salt from member_secure where id = ?";
+			String sql = "select salt from member_secure where member_id = ?";
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setInt(1, member.getId());
+			pstmt.setString(1, member.getMemberId());
 			
 			rs = pstmt.executeQuery();
 			if (rs.next()) return rs.getString("salt");
@@ -45,10 +45,10 @@ public class MemberSecureDAO {
 		try {
 			con = DBUtil.getConnection(url, user, password);
 			
-			String sql = "insert into member_secure (id, salt) values (?, ?)";
+			String sql = "insert into member_secure (member_id, salt) values (?, ?)";
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setInt(1, member.getId());
+			pstmt.setString(1, member.getMemberId());
 			pstmt.setString(2, salt);
 			
 			int result = pstmt.executeUpdate();
@@ -67,11 +67,11 @@ public class MemberSecureDAO {
 		try {
 			con = DBUtil.getConnection(url, user, password);
 			
-			String sql = "update member_secure set salt = ? where id = ?";
+			String sql = "update member_secure set salt = ? where member_id = ?";
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, salt);
-			pstmt.setInt(2, member.getId());
+			pstmt.setString(2, member.getMemberId());
 			
 			int result = pstmt.executeUpdate();
 			if (result <= 0) throw new MyException("회원 정보 수정 실패");
@@ -89,10 +89,10 @@ public class MemberSecureDAO {
 		try {
 			con = DBUtil.getConnection(url, user, password);
 			
-			String sql = "delete from member_secure where id = ?";
+			String sql = "delete from member_secure where member_id = ?";
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setInt(1, member.getId());
+			pstmt.setString(1, member.getMemberId());
 			
 			int result = pstmt.executeUpdate();
 			if (result <= 0) throw new MyException("회원 탈퇴 실패");
