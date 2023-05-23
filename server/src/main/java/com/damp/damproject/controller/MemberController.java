@@ -10,7 +10,9 @@ import com.damp.damproject.service.MemberService;
 import com.damp.damproject.util.MyException;
 import com.damp.damproject.vo.MemberVO;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -21,11 +23,16 @@ public class MemberController {
 	
 	@PostMapping("login")
 	@ResponseBody
-	public String login(MemberVO member, HttpServletRequest request){
+	public String login(MemberVO member, HttpServletResponse response, HttpServletRequest request){
 		try {
 			member = memberService.login(member);
 			HttpSession session = request.getSession();
 			session.setAttribute("member", member);
+			
+			Cookie cookie = new Cookie("JSESSIONID", session.getId());
+			cookie.setPath("/");
+			response.addCookie(cookie);
+			
 			return "OK";
 		} catch (MyException e) {
 			e.printStackTrace();
