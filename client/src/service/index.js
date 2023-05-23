@@ -3,7 +3,7 @@ import axios from "axios";
 function ServerApi() {
   const instance = axios.create({
     // env 로 빼야하나?
-    baseURL: "http://localhost:3000/",
+    baseURL: process.env.VUE_APP_SERVER_URL,
     header: {
       "Content-Type": "application/json;charset=utf-8",
     },

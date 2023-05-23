@@ -28,6 +28,7 @@ export const useUserStore = defineStore("user", () => {
       (data) => {
         if (data.message === "OK") {
           // 로그인 성공
+          // data.response.getCookies??
         } else {
           // 로그인 실패
         }
@@ -85,9 +86,8 @@ export const useUserStore = defineStore("user", () => {
       }
     );
   }
-  function MemberDelete(id) {
+  function MemberDelete() {
     memberDelete(
-      id,
       (data) => {
         if (data.message === "ok") {
           // 회원탈퇴 성공

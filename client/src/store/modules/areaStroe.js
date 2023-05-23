@@ -7,6 +7,9 @@ import {
   searchByaddress,
 } from "@/service/area";
 
+// 얘를 전역으로 관리하는게 맞을까??
+// 과연/?????
+
 export const useAreaStore = defineStore("area", () => {
   let sidoList = ref([{}]);
   let gugunList = ref([{}]);

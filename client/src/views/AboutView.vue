@@ -13,12 +13,10 @@ import Typed from "typed.js";
 
 // about components
 import Information from "@/components/about/AboutInformation.vue";
-import AboutBlock from "@/components/about/AboutBlock.vue";
 import Featuring from "@/components/about/AboutFeaturing.vue";
+import TheCubeView from "@/components/about/TheCubeView.vue";
 
 const body = document.getElementsByTagName("body")[0];
-
-// let user = "test";
 
 //hooks
 onMounted(() => {
@@ -68,7 +66,7 @@ onUnmounted(() => {
       :sticky="true"
       :transparent="false"
     />
-    <!-- // 로그인 한 상태 -->
+    <!-- 로그인 한 상태 -->
     <DefaultNavbar
       v-else
       :user="user"
@@ -78,6 +76,7 @@ onUnmounted(() => {
         color: 'btn-dark',
       }"
       :sticky="true"
+      :transparent="false"
     />
     <header class="bg-gradient-dark">
       <div
@@ -113,7 +112,7 @@ onUnmounted(() => {
     </header>
     <div class="card card-body shadow-xl mx-3 mx-md-4 mt-n6">
       <Information />
-      <AboutBlock />
+      <TheCubeView />
       <Featuring />
     </div>
     <DefaultFooter />
