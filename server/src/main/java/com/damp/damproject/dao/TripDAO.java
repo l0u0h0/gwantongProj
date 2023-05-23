@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import com.damp.damproject.util.DBUtil;
 import com.damp.damproject.util.MyException;
-import com.damp.damproject.vo.MemberVO;
 import com.damp.damproject.vo.TripVO;
 
 @Repository
