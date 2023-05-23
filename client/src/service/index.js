@@ -1,9 +1,9 @@
 import axios from "axios";
 
-function getServerApi() {
+function ServerApi() {
   const instance = axios.create({
     // env 로 빼야하나?
-    baseURL: "http://localhost:8080",
+    baseURL: "http://localhost:3000/",
     header: {
       "Content-Type": "application/json;charset=utf-8",
     },
@@ -11,4 +11,4 @@ function getServerApi() {
   return instance;
 }
 
-export { getServerApi };
+export { ServerApi };

@@ -20,7 +20,6 @@ export default {
   },
   watch: {
     places() {
-      console.log("충전소", this.places);
       this.positions = [];
       this.places.forEach((place) => {
         let obj = {};
@@ -34,7 +33,6 @@ export default {
   },
   created() {},
   mounted() {
-    // api 스크립트 소스 불러오기 및 지도 출력
     if (window.kakao && window.kakao.maps) {
       this.loadMap();
     } else {
@@ -42,7 +40,6 @@ export default {
     }
   },
   methods: {
-    // api 불러오기
     loadScript() {
       const script = document.createElement("script");
       script.src =
@@ -54,7 +51,6 @@ export default {
 
       document.head.appendChild(script);
     },
-    // 맵 출력하기
     loadMap() {
       const container = document.getElementById("map");
       const options = {
@@ -65,12 +61,9 @@ export default {
       this.map = new window.kakao.maps.Map(container, options);
       //   this.loadMaker();
     },
-    // 지정한 위치에 마커 불러오기
     loadMaker() {
-      // 현재 표시되어있는 marker들이 있다면 marker에 등록된 map을 없애준다.
-      console.log("1111");
       this.deleteMarker();
-      console.log("2222");
+
       // 마커 이미지를 생성합니다
       //   const imgSrc = require("@/assets/map/markerStar.png");
       // 마커 이미지의 이미지 크기 입니다
@@ -100,10 +93,8 @@ export default {
       this.map.setBounds(bounds);
     },
     deleteMarker() {
-      console.log("마커 싹 지우자!!!", this.markers.length);
       if (this.markers.length > 0) {
         this.markers.forEach((item) => {
-          console.log(item);
           item.setMap(null);
         });
       }

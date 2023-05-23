@@ -2,20 +2,20 @@
 import { onMounted, onUnmounted } from "vue";
 import router from "@/router";
 
-//example components
+// common components
 import DefaultNavbar from "@/components/common/NavbarDefault.vue";
 import DefaultFooter from "@/components/common/FooterDefault.vue";
 
-//Vue Material Kit 2 components
+// Material components
 import MaterialInput from "@/components/Material/MaterialInput.vue";
 import MaterialButton from "@/components/Material/MaterialButton.vue";
 // material-input
 import setMaterialInput from "@/assets/js/material-input";
 
-//image
+// bg image
 import bg from "@/assets/img/bg9.jpg";
 
-//dep
+// typed.js import
 import Typed from "typed.js";
 
 const body = document.getElementsByTagName("body")[0];
@@ -169,19 +169,19 @@ export default {
           </div>
           <div class="card-body">
             <form role="form" class="col-lg-4 col-md-8 col-12 mx-auto text-start" onsubmit="return false;">
-              <p class="lead">username</p>
+              <p class="lead">이름</p>
               <MaterialInput v-model.lazy="name" id="name" class="input-group-outline my-3" :label="{
                 text: '이름을 입력해주세요.',
                 class: 'form-label',
               }" type="text" ref="name" />
               <hr />
-              <p class="lead">userid</p>
+              <span class="lead">야이디</span><span class="text-xs">는 변경불가</span>
               <MaterialInput v-model.lazy="id" id="id" class="input-group-outline my-3" :label="{
                 text: ``,
                 class: 'form-label',
               }" type="text" is-disabled="true" />
               <hr />
-              <p class="lead">userpassword</p>
+              <p class="lead">비밀번호!</p>
               <MaterialInput
                     v-model.lazy="password"
                     id="password"
@@ -193,7 +193,7 @@ export default {
                     type="password"
                   />
               <hr />
-              <p class="lead">useremail</p>
+              <p class="lead">이메일</p>
               <MaterialInput v-model="email" id="email" class="input-group-outline my-3" :label="{
                 text: '이메일을 입력해주세요.',
                 class: 'form-label',

@@ -1,8 +1,8 @@
 // login, logout, memberInsert, modify, delete
 
-import { getServerApi } from "./index";
+import { ServerApi } from "./index";
 
-const api = getServerApi();
+const api = ServerApi();
 
 async function login(user, success, fail) {
   await api.post(`/login`, JSON.stringify(user)).then(success).catch(fail);

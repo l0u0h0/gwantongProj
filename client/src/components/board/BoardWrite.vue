@@ -1,17 +1,26 @@
 <script setup>
 import { onMounted } from "vue";
 
-//Vue Material Kit 2 components
+// Material components
 import MaterialInput from "@/components/Material/MaterialInput.vue";
 import MaterialTextArea from "../Material/MaterialTextArea.vue";
 import MaterialButton from "@/components/Material/MaterialButton.vue";
 
 // material-input
 import setMaterialInput from "@/assets/js/material-input";
+
+let title = "";
+let author = "";
+let content = "";
+
 onMounted(() => {
   setMaterialInput();
 });
+
 const reset = () => {
+  this.title = "";
+  this.author = "";
+  this.content = "";
   alert("초기화 구현해야함");
 };
 </script>

@@ -1,11 +1,10 @@
 <script setup>
 import { onMounted, onUpdated } from "vue";
-import router from "@/router";
 
-// example components
+// common components
 import HeaderDefault from "@/components/common/HeaderDefault.vue";
 
-//Vue Material Kit 2 components
+// Material components
 import MaterialInput from "@/components/Material/MaterialInput.vue";
 import MaterialSwitch from "@/components/Material/MaterialSwitch.vue";
 import MaterialButton from "@/components/Material/MaterialButton.vue";

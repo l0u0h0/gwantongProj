@@ -1,27 +1,19 @@
-// login, logout, memberInsert, modify, delete
+// getSido, getGugun, getMarker
 
-import { getServerApi } from "./index";
+import { ServerApi } from "./index";
 
-const api = getServerApi();
+const api = ServerApi();
 
-async function login(user, success, fail) {
-  await api.post(`/login`, JSON.stringify(user)).then(success).catch(fail);
+async function getSido(success, fail) {
+  await api.get(`/getSido`).then(success).catch(fail);
 }
 
-async function logout(id, success, fail) {
-  await api.get(`/logout/${id}`).then(success).catch(fail);
+async function getGugun(id, success, fail) {
+  await api.get(`/getGugun/${id}`).then(success).catch(fail);
 }
 
-async function memberInsert(user, success, fail) {
-  await api.post(`/memberInsert`, JSON.stringify(user)).then(success).catch(fail);
+async function getMarker(area, success, fail) {
+  await api.post(`/getMarker`, JSON.stringify(area)).then(success).catch(fail);
 }
 
-async function memberModify(user, success, fail) {
-  await api.put(`/modify`, JSON.stringify(user)).then(success).catch(fail);
-}
-
-async function memberDelete(id, success, fail) {
-  await api.delete(`/delete/${id}`).then(success).catch(fail);
-}
-
-export { login, logout, memberInsert, memberModify, memberDelete };
+export { getSido, getGugun, getMarker };

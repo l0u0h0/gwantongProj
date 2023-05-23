@@ -2,14 +2,16 @@
 import { onMounted } from "vue";
 import router from "@/router";
 
-//Vue Material Kit 2 components
+// Material components
 import MaterialButton from "@/components/Material/MaterialButton.vue";
 
 // material-input
 import setMaterialInput from "@/assets/js/material-input";
+
 onMounted(() => {
   setMaterialInput();
 });
+
 const Delete = () => {
   alert("글 삭제 진행해야함");
   router.push("/board/list");

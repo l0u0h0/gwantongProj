@@ -74,8 +74,6 @@ export default {
       }
     },
     password() {
-      console.log(this.password);
-      console.log(this.password_c);
       if (
         this.password.length >= 8 &&
         this.password == this.password_c &&
@@ -94,8 +92,6 @@ export default {
       }
     },
     password_c() {
-      console.log(this.area);
-      console.log(this.password_c);
       if (
         this.password.length >= 8 &&
         this.password == this.password_c &&
@@ -129,7 +125,6 @@ export default {
     },
     area: {
       handler: function () {
-        console.log(this.area);
         if (
           (this.area.sido == "basicSelect" ||
             this.area.gugun == "basicSelect") &&

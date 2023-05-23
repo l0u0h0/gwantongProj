@@ -1,17 +1,17 @@
 <script setup>
 import { onMounted, onUnmounted } from "vue";
 
-//example components
+// common components
 import DefaultNavbar from "@/components/common/NavbarDefault.vue";
 import DefaultFooter from "@/components/common/FooterDefault.vue";
 
-//image
-import bg0 from "@/assets/img/rock_grandpa.jpg";
+// bg
+import bg from "@/assets/img/rock_grandpa.jpg";
 
-//dep
+// typed
 import Typed from "typed.js";
 
-//sections
+// about components
 import Information from "@/components/about/AboutInformation.vue";
 import AboutBlock from "@/components/about/AboutBlock.vue";
 import Featuring from "@/components/about/AboutFeaturing.vue";
@@ -82,7 +82,7 @@ onUnmounted(() => {
     <header class="bg-gradient-dark">
       <div
         class="page-header min-vh-75"
-        :style="{ backgroundImage: `url(${bg0})` }"
+        :style="{ backgroundImage: `url(${bg})` }"
       >
         <span class="mask bg-gradient-dark opacity-6"></span>
         <div class="container mt-3">

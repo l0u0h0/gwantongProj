@@ -3,15 +3,26 @@
 import { onMounted, ref } from "vue";
 import axios from "axios";
 
-import TripMap from "./TripMap.vue";
+// kakaoMap import
+import TripMap from "@/components/trip/TripMap.vue";
+// Material import
 import MaterialButton from "@/components/Material/MaterialButton.vue";
+// listTable import
 import Table from "@/components/common/tables/TripTable.vue";
 
 // 드롭다운 상태 변수 생성
 let showDropdownArea = ref(false);
 let showDropdownType = ref(false);
 
+// list dummy data
 const tableDatas = [
+  {
+    img: "http://tong.visitkorea.or.kr/cms/resource/21/2657021_image2_1.jpg",
+    title: "제주공항",
+    address: "제주시 1번가",
+    type: "관광지",
+    tel: "010-2067-9786"
+  },
   {
     img: "http://tong.visitkorea.or.kr/cms/resource/21/2657021_image2_1.jpg",
     title: "제주공항",
@@ -26,15 +37,8 @@ let datas = null;
 const search = () => {
   let areaCode = document.getElementById("search-area").value;
   let areaDetailCode = document.getElementById("search-area-detail").value;
-  let contentTypeId = document.getElementById("search-content-id").value;
   console.log(areaCode);
   console.log(areaDetailCode);
-
-  if (parseInt(areaCode)) searchUrl += `&areaCode=${areaCode}`;
-  if (parseInt(areadetailCode))
-    searchUrl += `&sigunguCode=${areadetailCode}`;
-  if (parseInt(contentTypeId))
-    searchUrl += `&contentTypeId=${contentTypeId}`;
 
   // axios.get(searchUrl)
   //   .then((data) => datas = data.data.response.items.item);
