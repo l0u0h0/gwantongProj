@@ -1,11 +1,18 @@
 import jwtDecode from "jwt-decode";
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
-import { login, logout, memberInsert, memberModify, memberDelete } from "@/service/user";
+import router from "@/router";
+import {
+  login,
+  logout,
+  memberInsert,
+  memberModify,
+  memberDelete,
+} from "@/service/user";
 
-export const useUserStore = defineStore('user', () => {
-  const userid = ref('default');
-  const userpw = ref('');
+export const useUserStore = defineStore("user", () => {
+  const userid = ref("default");
+  const userpw = ref("");
 
   const testUser = computed(() => userid.value + " " + userpw.value);
 
@@ -15,10 +22,11 @@ export const useUserStore = defineStore('user', () => {
   }
 
   function Login(id, pw) {
-    const user = { id, pw };
-    login(user,
+    const user = { id, pw, name: "", email: "", address: "" };
+    login(
+      user,
       (data) => {
-        if (data.message === "ok") {
+        if (data.message === "OK") {
           // 로그인 성공
         } else {
           // 로그인 실패
@@ -26,12 +34,13 @@ export const useUserStore = defineStore('user', () => {
       },
       (error) => {
         console.error(error);
-    })
+      }
+    );
   }
-  function Logout(id) {
-    logout(id,
+  function Logout() {
+    logout(
       (data) => {
-        if (data.message === "ok") {
+        if (data.message === "OK") {
           // 로그아웃 성공
         } else {
           // 로그아웃 실패
@@ -39,27 +48,33 @@ export const useUserStore = defineStore('user', () => {
       },
       (error) => {
         console.error(error);
-    })
+      }
+    );
   }
   function MemberInsert(name, id, pw, email, area) {
-    const user = { name, id, pw, email, area };
-    memberInsert(user,
+    const user = { id, pw, name, email, address: `${area.sido} ${area.gugun}` };
+    memberInsert(
+      user,
       (data) => {
-        if (data.message === "ok") {
+        if (data.message === "OK") {
           // 회원가입 성공
+
+          router.push("/");
         } else {
           // 회원가입 실패
         }
       },
       (error) => {
         console.error(error);
-    })
+      }
+    );
   }
   function MemberModify(name, id, pw, email, area) {
-    const user = { name, id, pw, email, area };
-    memberModify(user,
+    const user = { id, pw, name, email, address: `${area.sido} ${area.gugun}` };
+    memberModify(
+      user,
       (data) => {
-        if (data.message === "ok") {
+        if (data.message === "OK") {
           // 회원수정 성공
         } else {
           // 회원수정 실패
@@ -67,10 +82,12 @@ export const useUserStore = defineStore('user', () => {
       },
       (error) => {
         console.error(error);
-    })
+      }
+    );
   }
   function MemberDelete(id) {
-    memberDelete(id,
+    memberDelete(
+      id,
       (data) => {
         if (data.message === "ok") {
           // 회원탈퇴 성공
@@ -80,8 +97,19 @@ export const useUserStore = defineStore('user', () => {
       },
       (error) => {
         console.error(error);
-    })
+      }
+    );
   }
 
-  return { userid, userpw, testUser, testSetUser, Login, Logout, MemberInsert, MemberModify, MemberDelete };
-})
+  return {
+    userid,
+    userpw,
+    testUser,
+    testSetUser,
+    Login,
+    Logout,
+    MemberInsert,
+    MemberModify,
+    MemberDelete,
+  };
+});
