@@ -11,7 +11,14 @@ import {
 } from "@/service/user";
 
 export const useUserStore = defineStore("user", () => {
-  const userinfo = ref();
+  const userCookie = ref("");
+
+  const setUserCookie = computed((str) => {
+    userCookie.value = str;
+  });
+  const deleteCookie = computed(() => {
+    userCookie.value = "";
+  });
 
   function Login(id, password) {
     const user = { memberId: id, password, name: "", email: "", address: "" };
@@ -21,10 +28,9 @@ export const useUserStore = defineStore("user", () => {
         if (data.data === "OK") {
           // 로그인 성공
           alert("로그인 성공!!");
-          // data.response.getCookies??
-          userinfo.value(data);
-          console.log(data);
-          
+          const userCookie = document.cookie.split("=");
+          setUserCookie(userCookie[0]);
+          sessionStorage.setItem(`${userCookie[0]}`, `${userCookie[1]}`);
         } else {
           // 로그인 실패
           alert("로그인 실패!!");
@@ -40,6 +46,8 @@ export const useUserStore = defineStore("user", () => {
       (data) => {
         if (data.data === "OK") {
           // 로그아웃 성공
+          sessionStorage.removeItem("");
+          deleteCookie();
           router.push("/");
         } else {
           // 로그아웃 실패
@@ -52,7 +60,13 @@ export const useUserStore = defineStore("user", () => {
     );
   }
   function MemberInsert(name, id, pw, email, area) {
-    const user = { memberId: id, password: pw, name, email, address: `${area.sido} ${area.gugun}` };
+    const user = {
+      memberId: id,
+      password: pw,
+      name,
+      email,
+      address: `${area.sido} ${area.gugun}`,
+    };
     memberInsert(
       user,
       (data) => {
@@ -71,7 +85,13 @@ export const useUserStore = defineStore("user", () => {
     );
   }
   function MemberModify(name, id, pw, email, area) {
-    const user = { memberId: id, password: pw, name, email, address: `${area.sido} ${area.gugun}` };
+    const user = {
+      memberId: id,
+      password: pw,
+      name,
+      email,
+      address: `${area.sido} ${area.gugun}`,
+    };
     memberModify(
       user,
       (data) => {
@@ -108,7 +128,9 @@ export const useUserStore = defineStore("user", () => {
   }
 
   return {
-    userinfo,
+    userCookie,
+    setUserCookie,
+    deleteCookie,
     Login,
     Logout,
     MemberInsert,

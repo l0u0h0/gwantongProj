@@ -20,7 +20,7 @@ export default {
   },
   watch: {
     places() {
-      console.log(this.places)
+      console.log(this.places);
       this.positions = [];
       this.places.forEach((place) => {
         let obj = {};
@@ -38,7 +38,7 @@ export default {
       this.displayMarker();
     },
   },
-  created() { },
+  created() {},
   mounted() {
     if (window.kakao && window.kakao.maps) {
       this.loadMap();
@@ -49,7 +49,6 @@ export default {
   methods: {
     displayMarker() {
       this.positions.forEach(function (pos) {
-
         const marker = new window.kakao.maps.Marker({
           map: this.map,
           position: pos.latlng,
@@ -114,7 +113,7 @@ export default {
         wrap.appendChild(info);
 
         // customoverlay 생성, 이때 map을 선언하지 않으면 지도위에 올라가지 않습니다.
-        var overlay = new daum.maps.CustomOverlay({
+        var overlay = new window.kakao.maps.CustomOverlay({
           position: pos.latlng,
           content: wrap,
         });
@@ -127,8 +126,7 @@ export default {
 
       // 첫번째 검색 정보를 이용하여 지도 중심을 이동 시킵니다
       this.map.setCenter(this.positions[0].latlng);
-    }
-    ,
+    },
     loadScript() {
       const script = document.createElement("script");
       script.src =
@@ -152,7 +150,7 @@ export default {
     },
     loadMaker() {
       this.deleteMarker();
-      
+
       this.markers = [];
       this.positions.forEach((position) => {
         const marker = new window.kakao.maps.Marker({

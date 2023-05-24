@@ -15,6 +15,13 @@ import Typed from "typed.js";
 import Information from "@/components/about/AboutInformation.vue";
 import Featuring from "@/components/about/AboutFeaturing.vue";
 import TheCubeView from "@/components/about/TheCubeView.vue";
+// pinia
+import { useUserStore } from "@/store/modules/userStore";
+import { storeToRefs } from "pinia";
+
+const store = useUserStore();
+
+const { userCookie } = storeToRefs(store);
 
 const body = document.getElementsByTagName("body")[0];
 console.log(document.cookie);
@@ -47,7 +54,10 @@ onMounted(() => {
     });
   }
 });
-let user = "hi";
+let user =
+  sessionStorage.getItem(userCookie.value) != null
+    ? sessionStorage.getItem(userCookie.value)
+    : null;
 onUnmounted(() => {
   body.classList.remove("about-us");
   body.classList.remove("bg-gray-200");
