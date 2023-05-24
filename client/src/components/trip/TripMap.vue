@@ -34,8 +34,8 @@ export default {
         this.positions.push(obj);
       });
       console.log(this.positions);
-      // this.loadMaker();
-      this.displayMarker();
+      this.loadMaker();
+      // this.displayMarker();
     },
   },
   created() {},

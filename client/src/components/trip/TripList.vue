@@ -11,10 +11,7 @@ import MaterialButton from "@/components/Material/MaterialButton.vue";
 import Table from "@/components/common/tables/TripTable.vue";
 
 // import TripService
-import {
-  searchByaddress,
-  searchByType,
-} from "@/service/area";
+import { searchByaddress, searchByType } from "@/service/area";
 
 // 드롭다운 상태 변수 생성
 let showDropdownArea = ref(false);
@@ -49,16 +46,44 @@ const search = async () => {
   console.log(typeCode);
 
   if (areaDetailCode == 0 || areaCode == 0) {
-    await searchByType(typeCode, (res) => {
-      datas = res.data;
-    }, (error) => { console.error(error) });
+    await searchByType(
+      typeCode,
+      (res) => {
+        datas = res.data;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   } else {
-    await searchByaddress({sido: areaCode, gugun: areaDetailCode}, (res) => {
-      datas = res.data;
-    }, (error) => { console.error(error) });
+    await searchByaddress(
+      { sido: areaCode, gugun: areaDetailCode },
+      (res) => {
+        datas = res.data;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 
   console.log(datas);
+
+  if (datas.length > 10) {
+    for (let i = 0; i < 10; i++) {
+      tableDatas[i].img = datas[i].img != null ? datas[i].img : "";
+      tableDatas[i].title = datas[i].title;
+      tableDatas[i].address = datas[i].addr1 + " " + datas[i].addr2;
+      tableDatas[i].tel = datas[i].tel;
+    }
+  } else {
+    for ((i, data) in datas) {
+      tableDatas[i].img = data.img != null ? data.img : "";
+      tableDatas[i].title = data.title;
+      tableDatas[i].address = data.addr1 + " " + data.addr2;
+      tableDatas[i].tel = data.tel;
+    }
+  }
 };
 
 onMounted(async () => {
@@ -68,15 +93,6 @@ onMounted(async () => {
     "&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json";
 
   await axios.get(areaUrl).then((data) => makeOption(data));
-
-  // await getSido(
-  //   (data) => {
-  //     makeOption(data);
-  //   },
-  //   (error) => {
-  //     console.error(error);
-  //   }
-  // );
 
   function makeOption(data) {
     const areas = data.data.response.body.items.item;
@@ -100,16 +116,6 @@ onMounted(async () => {
       "&MobileApp=AppTest&_type=json";
 
     axios.get(areaUrl).then((data) => makeOption(data));
-
-    // getGugun(
-    //   areaCode,
-    //   (data) => {
-    //     makeOption(data);
-    //   },
-    //   (error) => {
-    //     console.error(error);
-    //   }
-    // );
 
     function makeOption(data) {
       let areas = data.data.response.body.items.item;
@@ -137,35 +143,64 @@ onMounted(async () => {
         <div class="row col-lg-2 text-center">
           <h2 class="text-sans-serif mt-n6">Filter</h2>
           <div class="dropdown mt-n1">
-            <MaterialButton variant="gradient" color="secondary" class="dropdown-toggle"
-              :class="{ show: showDropdownArea }" fullWidth size="lg" @focusout="showDropdownArea = false"
-              id="dropdownMenuButton" data-bs-toggle="dropdown" :area-expanded="showDropdownArea"
-              @click="showDropdownArea = !showDropdownArea">
+            <MaterialButton
+              variant="gradient"
+              color="secondary"
+              class="dropdown-toggle"
+              :class="{ show: showDropdownArea }"
+              fullWidth
+              size="lg"
+              @focusout="showDropdownArea = false"
+              id="dropdownMenuButton"
+              data-bs-toggle="dropdown"
+              :area-expanded="showDropdownArea"
+              @click="showDropdownArea = !showDropdownArea"
+            >
               지역별
             </MaterialButton>
 
-            <ul class="dropdown-menu px-2 py-3" :class="{ show: showDropdownArea }" aria-labelledby="dropdownMenuButton">
+            <ul
+              class="dropdown-menu px-2 py-3"
+              :class="{ show: showDropdownArea }"
+              aria-labelledby="dropdownMenuButton"
+            >
               <li>
                 <select id="search-area" class="dropdown-item border-radius-md">
                   <option value="0" selected>검색 할 시/도 선택</option>
                 </select>
               </li>
               <li>
-                <select id="search-area-detail" class="dropdown-item border-radius-md">
+                <select
+                  id="search-area-detail"
+                  class="dropdown-item border-radius-md"
+                >
                   <option value="0" selected>검색 할 구/군 선택</option>
                 </select>
               </li>
             </ul>
           </div>
           <div class="dropdown mt-3">
-            <MaterialButton variant="gradient" color="secondary" class="dropdown-toggle"
-              :class="{ show: showDropdownType }" fullWidth size="lg" @focusout="showDropdownType = false"
-              id="dropdownMenuButton" data-bs-toggle="dropdown" :area-expanded="showDropdownType"
-              @click="showDropdownType = !showDropdownType">
+            <MaterialButton
+              variant="gradient"
+              color="secondary"
+              class="dropdown-toggle"
+              :class="{ show: showDropdownType }"
+              fullWidth
+              size="lg"
+              @focusout="showDropdownType = false"
+              id="dropdownMenuButton"
+              data-bs-toggle="dropdown"
+              :area-expanded="showDropdownType"
+              @click="showDropdownType = !showDropdownType"
+            >
               유형별
             </MaterialButton>
 
-            <ul class="dropdown-menu px-2 py-3" :class="{ show: showDropdownType }" aria-labelledby="dropdownMenuButton">
+            <ul
+              class="dropdown-menu px-2 py-3"
+              :class="{ show: showDropdownType }"
+              aria-labelledby="dropdownMenuButton"
+            >
               <li>
                 <select id="search-type" class="dropdown-item border-radius-md">
                   <option value="0" selected>관광지 유형</option>
@@ -182,7 +217,13 @@ onMounted(async () => {
             </ul>
           </div>
           <div>
-            <MaterialButton color="dark" class="mt-3" fullWidth size="lg" @click="search()">
+            <MaterialButton
+              color="dark"
+              class="mt-3"
+              fullWidth
+              size="lg"
+              @click="search()"
+            >
               Search
             </MaterialButton>
           </div>
@@ -193,11 +234,13 @@ onMounted(async () => {
           </div>
         </div>
       </div>
-      <div class="h4 mx-6 mt-5 py-3 shadow-dark bg-gradient-info border-radius-lg text-white text-center">
+      <div
+        class="h4 mx-6 mt-5 py-3 shadow-dark bg-gradient-info border-radius-lg text-white text-center"
+      >
         ~ 관광지 리스트 ~
       </div>
       <!-- List Table 들어갈 자리 -->
-      <Table class="mt-n5 pb-6" :rows="datas != null ? tableDatas : tableDatas" />
+      <Table class="mt-n5 pb-6" :rows="tableDatas" />
     </div>
   </section>
 </template>
