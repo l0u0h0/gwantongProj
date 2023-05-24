@@ -2,7 +2,7 @@
 defineProps({
   headers: {
     type: Array,
-    default: () => ["。","이름", "주소", "유형", "전화번호"],
+    default: () => ["。", "이름", "주소", "유형", "전화번호"],
   },
   rows: {
     type: Array,
@@ -11,9 +11,19 @@ defineProps({
     title: String,
     address: String,
     type: String,
-    tel: Number
+    tel: Number,
   },
 });
+</script>
+<script>
+export default {
+  data() {
+    return {};
+  },
+  watch: {
+    rows() {},
+  },
+};
 </script>
 <template>
   <section class="pt-5 mt-5">
@@ -25,27 +35,25 @@ defineProps({
               <table class="table align-items-center mb-0">
                 <thead>
                   <tr>
-                    <th v-for="(header, index) in headers" :key="header"
+                    <th
+                      v-for="(header, index) in headers"
+                      :key="header"
                       class="text-uppercase text-dark text-lg text-center font-weight-bolder"
-                      :class="{ 'ps-2': index == 1 }">
+                      :class="{ 'ps-2': index == 1 }"
+                    >
                       {{ header }}
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="text-center col" v-for="(
-                          {
-                            img,
-                            title,
-                            address,
-                            type,
-                            tel,
-                          },
-                            index
-                        ) of rows" :key="index">
+                  <tr
+                    class="text-center col"
+                    v-for="({ img, title, address, type, tel }, index) of rows"
+                    :key="index"
+                  >
                     <td>
                       <div class="px-3 py-2 opacity-9">
-                        <img :src="img" :alt="title+'img'" class="w-70" />
+                        <img :src="img" :alt="title + 'img'" class="w-70" />
                       </div>
                     </td>
                     <td>

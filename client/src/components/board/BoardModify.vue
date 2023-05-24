@@ -1,17 +1,26 @@
 <script setup>
 import { onMounted } from "vue";
 
-//Vue Material Kit 2 components
+// Material components
 import MaterialInput from "@/components/Material/MaterialInput.vue";
 import MaterialButton from "@/components/Material/MaterialButton.vue";
 import MaterialTextArea from "@/components/Material/MaterialTextArea.vue";
 
 // material-input
 import setMaterialInput from "@/assets/js/material-input";
+
+let title = "";
+let author = "";
+let content = "";
+
 onMounted(() => {
   setMaterialInput();
 });
+
 const reset = () => {
+  this.itle = "";
+  this.author = "";
+  this.content = "";
   alert("초기화 구현");
 };
 </script>
@@ -34,21 +43,21 @@ const reset = () => {
             <form role="form" class="text-start" onsubmit="return false;">
               <div class="m-2">
                 <h5>제목</h5>
-                <MaterialInput id="title" class="input-group-outline my-3" :label="{
+                <MaterialInput v-model="title" id="title" class="input-group-outline my-3" :label="{
                   text: '제목',
                   class: 'form-label',
                 }" type="text" />
               </div>
               <div class="m-2">
                 <h5>작성자</h5>
-                <MaterialInput id="title" class="input-group-outline my-3" :label="{
+                <MaterialInput v-model="author" id="author" class="input-group-outline my-3" :label="{
                   text: '작성자',
                   class: 'form-label',
                 }" type="text" />
               </div>
               <div class="m-2">
                 <h5>내용</h5>
-                <MaterialTextArea id="title" class="input-group-outline my-3" 
+                <MaterialTextArea v-model="content" id="content" class="input-group-outline my-3" 
                 type="text" />
               </div>
 

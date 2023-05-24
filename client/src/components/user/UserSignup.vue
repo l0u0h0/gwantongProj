@@ -13,13 +13,14 @@ import MaterialProgress from "@/components/Material/MaterialProgress.vue";
 // material-input
 import setMaterialInput from "@/assets/js/material-input";
 
+// pinia
+import { useUserStore } from "@/store/modules/userStore";
+
+const store = useUserStore();
+
 onMounted(() => {
   setMaterialInput();
 });
-const hello = () => {
-  alert("회원가입 진행해야함");
-  router.push("/");
-};
 </script>
 <script>
 export default {
@@ -54,9 +55,19 @@ export default {
         this.check.name = false;
       }
       if (this.check.name) {
-        document.getElementById("namediv").setAttribute("class", "input-group input-group-outline my-3 is-valid");
+        document
+          .getElementById("namediv")
+          .setAttribute(
+            "class",
+            "input-group input-group-outline my-3 is-valid"
+          );
       } else {
-        document.getElementById("namediv").setAttribute("class", "input-group input-group-outline my-3 is-invalid");
+        document
+          .getElementById("namediv")
+          .setAttribute(
+            "class",
+            "input-group input-group-outline my-3 is-invalid"
+          );
       }
     },
     id() {
@@ -68,14 +79,22 @@ export default {
         this.check.id = false;
       }
       if (this.check.id) {
-        document.getElementById("iddiv").setAttribute("class", "input-group input-group-outline my-3 is-valid");
+        document
+          .getElementById("iddiv")
+          .setAttribute(
+            "class",
+            "input-group input-group-outline my-3 is-valid"
+          );
       } else {
-        document.getElementById("iddiv").setAttribute("class", "input-group input-group-outline my-3 is-invalid");
+        document
+          .getElementById("iddiv")
+          .setAttribute(
+            "class",
+            "input-group input-group-outline my-3 is-invalid"
+          );
       }
     },
     password() {
-      console.log(this.password);
-      console.log(this.password_c);
       if (
         this.password.length >= 8 &&
         this.password == this.password_c &&
@@ -88,14 +107,22 @@ export default {
         this.check.passwrod = false;
       }
       if (this.check.password) {
-        document.getElementById("passworddiv").setAttribute("class", "input-group input-group-outline my-3 is-valid");
+        document
+          .getElementById("passworddiv")
+          .setAttribute(
+            "class",
+            "input-group input-group-outline my-3 is-valid"
+          );
       } else {
-        document.getElementById("passworddiv").setAttribute("class", "input-group input-group-outline my-3 is-invalid");
+        document
+          .getElementById("passworddiv")
+          .setAttribute(
+            "class",
+            "input-group input-group-outline my-3 is-invalid"
+          );
       }
     },
     password_c() {
-      console.log(this.area);
-      console.log(this.password_c);
       if (
         this.password.length >= 8 &&
         this.password == this.password_c &&
@@ -108,9 +135,19 @@ export default {
         this.check.passwrod = false;
       }
       if (this.check.password) {
-        document.getElementById("passworddiv").setAttribute("class", "input-group input-group-outline my-3 is-valid");
+        document
+          .getElementById("passworddiv")
+          .setAttribute(
+            "class",
+            "input-group input-group-outline my-3 is-valid"
+          );
       } else {
-        document.getElementById("passworddiv").setAttribute("class", "input-group input-group-outline my-3 is-invalid");
+        document
+          .getElementById("passworddiv")
+          .setAttribute(
+            "class",
+            "input-group input-group-outline my-3 is-invalid"
+          );
       }
     },
     email() {
@@ -122,14 +159,23 @@ export default {
         this.check.email = false;
       }
       if (this.check.email) {
-        document.getElementById("emaildiv").setAttribute("class", "input-group input-group-outline my-3 is-valid");
+        document
+          .getElementById("emaildiv")
+          .setAttribute(
+            "class",
+            "input-group input-group-outline my-3 is-valid"
+          );
       } else {
-        document.getElementById("emaildiv").setAttribute("class", "input-group input-group-outline my-3 is-invalid");
+        document
+          .getElementById("emaildiv")
+          .setAttribute(
+            "class",
+            "input-group input-group-outline my-3 is-invalid"
+          );
       }
     },
     area: {
       handler: function () {
-        console.log(this.area);
         if (
           (this.area.sido == "basicSelect" ||
             this.area.gugun == "basicSelect") &&
@@ -311,7 +357,7 @@ export default {
                       size="lg"
                       fullWidth
                       :disabled="percent != 100"
-                      @click="hello()"
+                      @click="store.MemberInsert(name, id, pw, email, area)"
                       >회원가입</MaterialButton
                     >
                   </div>

@@ -1,17 +1,14 @@
 <script setup>
 import { onMounted, onUnmounted } from "vue";
 
-//example components
+// common components
 import DefaultNavbar from "@/components/common/NavbarDefault.vue";
 import DefaultFooter from "@/components/common/FooterDefault.vue";
 
-//image
-import bg0 from "@/assets/img/rock_grandpa.jpg";
-
-//dep
+// typed.js import
 import Typed from "typed.js";
 
-//sections=
+// trip components
 import TripList from "@/components/trip/TripList.vue";
 
 const body = document.getElementsByTagName("body")[0];
@@ -43,22 +40,26 @@ onUnmounted(() => {
   <div>
     <!-- 로그인 하기 전 상태 -->
     <DefaultNavbar
+      v-if="!user"
       :action="{
+        user: `${user}`,
         route: '/user/signin',
         label: '로그인',
         color: 'btn-dark',
       }"
       :sticky="true"
     />
-    <!-- // 로그인 한 상태
+    <!-- // 로그인 한 상태 -->
     <DefaultNavbar
+      v-else
       :action="{
+        user: `${user}`,
         route: '/user/logout',
         label: '로그아웃',
         color: 'btn-dark',
       }"
       :sticky="true"
-    /> -->
+    />
     <header class="bg-gradient-dark">
       <div
         class="page-header min-vh-50"

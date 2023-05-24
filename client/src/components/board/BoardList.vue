@@ -1,9 +1,10 @@
 <script setup>
-// Vue Material Kit 2 component
+// Material component
 import Table from "@/components/common/tables/BoardTable.vue";
 import { onMounted } from "vue";
 import MaterialButton from "../Material/MaterialButton.vue";
 
+// typed.js import
 import Typed from "typed.js";
 
 onMounted(() => {

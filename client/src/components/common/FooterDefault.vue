@@ -1,5 +1,5 @@
 <script setup>
-import logoDark from "@/assets/img/ssafy_logo.png";
+import SSAFY from "@/assets/img/ssafy_logo.png";
 import { defineProps } from "vue";
 
 defineProps({
@@ -10,7 +10,7 @@ defineProps({
     route: "",
     default: () => ({
       name: "Enjoy Trip",
-      logo: logoDark,
+      logo: SSAFY,
       route: "/"
     })
   },
