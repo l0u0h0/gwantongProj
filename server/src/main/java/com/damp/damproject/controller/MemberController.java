@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.damp.damproject.service.MemberService;
@@ -23,7 +24,7 @@ public class MemberController {
 	
 	@PostMapping("login")
 	@ResponseBody
-	public String login(MemberVO member, HttpServletResponse response, HttpServletRequest request){
+	public String login(@RequestBody MemberVO member, HttpServletResponse response, HttpServletRequest request){
 		try {
 			member = memberService.login(member);
 			if (member == null) return "FAIL";
@@ -52,7 +53,7 @@ public class MemberController {
 	
 	@PostMapping("register")
 	@ResponseBody
-	public String register(MemberVO member){
+	public String register(@RequestBody MemberVO member){
 		try {
 			memberService.register(member);
 			return "OK";
@@ -64,7 +65,7 @@ public class MemberController {
 	
 	@PostMapping("updateMember")
 	@ResponseBody
-	public String updateMember(MemberVO member, HttpServletRequest request){
+	public String updateMember(@RequestBody MemberVO member, HttpServletRequest request){
 		HttpSession session = request.getSession(false);
 		if (session == null) return "FAIL";
 		System.out.println(session);
