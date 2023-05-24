@@ -45,6 +45,7 @@ public class MemberController {
 	@GetMapping("logout")
 	@ResponseBody
 	public String logout(HttpServletRequest request){
+		System.out.println("hello");
 		HttpSession session = request.getSession(false);
 		if (session != null) session.invalidate();
 		return "OK";
@@ -53,6 +54,7 @@ public class MemberController {
 	@PostMapping("register")
 	@ResponseBody
 	public String register(MemberVO member){
+		System.out.println(member.toString());
 		try {
 			memberService.register(member);
 			return "OK";

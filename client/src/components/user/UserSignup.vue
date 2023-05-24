@@ -357,7 +357,7 @@ export default {
                       size="lg"
                       fullWidth
                       :disabled="percent != 100"
-                      @click="store.MemberInsert(name, id, pw, email, area)"
+                      @click="store.MemberInsert(name, id, password, email, area)"
                       >회원가입</MaterialButton
                     >
                   </div>

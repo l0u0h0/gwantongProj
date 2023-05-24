@@ -29,6 +29,7 @@ export const useUserStore = defineStore("user", () => {
         if (data.message === "OK") {
           // 로그인 성공
           // data.response.getCookies??
+          console.log(data);
         } else {
           // 로그인 실패
           alert("로그인 실패!!");
@@ -57,7 +58,8 @@ export const useUserStore = defineStore("user", () => {
     );
   }
   function MemberInsert(name, id, pw, email, area) {
-    const user = { id, pw, name, email, address: `${area.sido} ${area.gugun}` };
+    console.log(name);
+    const user = { memberId: id, password: pw, name, email, address: `${area.sido} ${area.gugun}` };
     memberInsert(
       user,
       (data) => {
