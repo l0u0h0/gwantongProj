@@ -17,6 +17,7 @@ import Featuring from "@/components/about/AboutFeaturing.vue";
 import TheCubeView from "@/components/about/TheCubeView.vue";
 
 const body = document.getElementsByTagName("body")[0];
+console.log(document.cookie);
 
 //hooks
 onMounted(() => {
@@ -46,7 +47,7 @@ onMounted(() => {
     });
   }
 });
-
+let user = "hi";
 onUnmounted(() => {
   body.classList.remove("about-us");
   body.classList.remove("bg-gray-200");
@@ -71,7 +72,7 @@ onUnmounted(() => {
       v-else
       :user="user"
       :action="{
-        route: '/user/logout',
+        route: '#',
         label: '로그아웃',
         color: 'btn-dark',
       }"

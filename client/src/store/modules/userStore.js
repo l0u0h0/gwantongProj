@@ -11,25 +11,20 @@ import {
 } from "@/service/user";
 
 export const useUserStore = defineStore("user", () => {
-  const userid = ref("");
-  const userpw = ref("");
+  const userinfo = ref();
 
-  const testUser = computed(() => userid.value + " " + userpw.value);
-
-  function testSetUser(getId, getPw) {
-    userid.value = getId;
-    userpw.value = getPw;
-  }
-
-  function Login(id, pw) {
-    const user = { id, pw, name: "", email: "", address: "" };
+  function Login(id, password) {
+    const user = { memberId: id, password, name: "", email: "", address: "" };
     login(
       user,
       (data) => {
-        if (data.message === "OK") {
+        if (data.data === "OK") {
           // 로그인 성공
+          alert("로그인 성공!!");
           // data.response.getCookies??
+          userinfo.value(data);
           console.log(data);
+          
         } else {
           // 로그인 실패
           alert("로그인 실패!!");
@@ -43,9 +38,8 @@ export const useUserStore = defineStore("user", () => {
   function Logout() {
     logout(
       (data) => {
-        if (data.message === "OK") {
+        if (data.data === "OK") {
           // 로그아웃 성공
-          localStorage.removeItem("token");
           router.push("/");
         } else {
           // 로그아웃 실패
@@ -58,12 +52,11 @@ export const useUserStore = defineStore("user", () => {
     );
   }
   function MemberInsert(name, id, pw, email, area) {
-    console.log(name);
     const user = { memberId: id, password: pw, name, email, address: `${area.sido} ${area.gugun}` };
     memberInsert(
       user,
       (data) => {
-        if (data.message === "OK") {
+        if (data.data === "OK") {
           // 회원가입 성공
           alert("회원가입 성공!!");
           router.push("/");
@@ -78,11 +71,11 @@ export const useUserStore = defineStore("user", () => {
     );
   }
   function MemberModify(name, id, pw, email, area) {
-    const user = { id, pw, name, email, address: `${area.sido} ${area.gugun}` };
+    const user = { memberId: id, password: pw, name, email, address: `${area.sido} ${area.gugun}` };
     memberModify(
       user,
       (data) => {
-        if (data.message === "OK") {
+        if (data.data === "OK") {
           // 회원수정 성공
           alert("회원 정보 수정 성공!!");
           router.push("/user/mypage");
@@ -99,7 +92,7 @@ export const useUserStore = defineStore("user", () => {
   function MemberDelete() {
     memberDelete(
       (data) => {
-        if (data.message === "OK") {
+        if (data.data === "OK") {
           // 회원탈퇴 성공
           alert("회원 탈퇴 성공!!");
           Logout();
@@ -115,10 +108,7 @@ export const useUserStore = defineStore("user", () => {
   }
 
   return {
-    userid,
-    userpw,
-    testUser,
-    testSetUser,
+    userinfo,
     Login,
     Logout,
     MemberInsert,

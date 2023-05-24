@@ -2,6 +2,10 @@
 import { RouterLink } from "vue-router";
 import { ref, watch, defineProps } from "vue";
 import { useWindowsWidth } from "../../assets/js/useWindowsWidth";
+// pinia
+import { useUserStore } from "@/store/modules/userStore";
+
+const store = useUserStore();
 
 const props = defineProps({
   action: {
@@ -57,7 +61,6 @@ watch(
     }
   }
 );
-// let user = "hi";
 /**
  * 로그인되면 유저 정보 세션에 넣기
  */
@@ -153,6 +156,7 @@ watch(
           <li class="nav-item">
             <a
               :href="action.route"
+              @click="store.Logout()"
               class="btn btn-sm mb-0 font-size-lg"
               :class="action.color"
               >{{ action.label }}</a

@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onUpdated } from "vue";
+import { onMounted } from "vue";
 
 // common components
 import HeaderDefault from "@/components/common/HeaderDefault.vue";
@@ -14,11 +14,15 @@ import setMaterialInput from "@/assets/js/material-input";
 
 // pinia
 import { useUserStore } from "@/store/modules/userStore";
+import { storeToRefs } from "pinia";
 
 const store = useUserStore();
 
+const { userinfo } = storeToRefs(store);
+
 onMounted(() => {
   setMaterialInput();
+  console.log(userinfo.value);
 });
 </script>
 <script>
@@ -100,7 +104,7 @@ export default {
                 </div>
               </div>
               <div class="card-body">
-                <form role="form" class="text-start">
+                <form class="text-start">
                   <MaterialInput
                     v-model="id"
                     id="id"
@@ -125,7 +129,6 @@ export default {
                     class="d-flex align-items-center mb-3"
                     id="rememberMe"
                     labelClass="mb-0 ms-3"
-                    checked
                     >ID 저장</MaterialSwitch
                   >
 

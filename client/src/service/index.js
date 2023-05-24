@@ -2,8 +2,7 @@ import axios from "axios";
 
 function ServerApi() {
   const instance = axios.create({
-    // env 로 빼야하나?
-    header: {
+    headers: {
       "Content-Type": "application/json;charset=utf-8",
     },
   });
