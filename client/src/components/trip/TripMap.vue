@@ -20,18 +20,25 @@ export default {
   },
   watch: {
     places() {
+      console.log(this.places)
       this.positions = [];
       this.places.forEach((place) => {
         let obj = {};
-        obj.title = place.statNm;
-        obj.latlng = new kakao.maps.LatLng(place.lat, place.lng);
+        obj.title = place.title;
+        obj.latlng = new kakao.maps.LatLng(place.latitude, place.longitude);
+        obj.img = place.first_image;
+        obj.addr1 = place.addr1;
+        obj.addr2 = place.addr2;
+        obj.tel = place.tel;
 
         this.positions.push(obj);
       });
+      console.log(this.positions);
       this.loadMaker();
+      // this.displayMarker();
     },
   },
-  created() {},
+  created() { },
   mounted() {
     if (window.kakao && window.kakao.maps) {
       this.loadMap();
@@ -40,12 +47,101 @@ export default {
     }
   },
   methods: {
+    displayMarker() {
+      this.positions.forEach(function (pos) {
+        var imageSrc =
+          "https://t1.daumcdn.net/localimages/07/mapapidoc/markerStar.png";
+
+        var imageSize = new window.kakao.maps.Size(24, 35);
+
+        var markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize);
+
+        var marker = new window.kakao.maps.Marker({
+          map: this.map,
+          position: pos.latlng,
+          title: pos.title,
+          image: markerImage,
+        });
+        // content HTMLElement 생성
+        var wrap = document.createElement("div");
+        wrap.className = "wrap";
+        // 정보 그릴 영역 wrap > info
+        var info = document.createElement("div");
+        info.className = "info";
+        // 제목과 닫기 버튼 들어갈 영역 info > title
+        var title = document.createElement("div");
+        title.className = "title";
+        title.appendChild(document.createTextNode(pos.title));
+        // close btn add title > close
+        var closeBtn = document.createElement("div");
+        closeBtn.className = "close";
+        closeBtn.setAttribute("title", "닫기");
+        // 닫기 이벤트 추가
+        closeBtn.onclick = function () {
+          overlay.setMap(null);
+        };
+        title.appendChild(closeBtn);
+
+        info.appendChild(title);
+
+        // 이미지와 설명 담을 영역 info > body
+        var body = document.createElement("div");
+        body.className = "body";
+        // 이미지 태그 body > img
+        var img = document.createElement("img");
+        img.className = "img";
+        // 데이터 있으면 넣기
+        img.setAttribute("src", pos.img.length > 1 ? pos.img : "#");
+        body.appendChild(img);
+        // 설명 영역 body > desc
+        var desc = document.createElement("div");
+        desc.className = "desc";
+        // 도로명 주소 desc > ellipsis
+        var addr1 = document.createElement("div");
+        addr1.className = "ellipsis";
+        addr1.appendChild(document.createTextNode(pos.addr1));
+        // 지번 주소 desc > jibun ellipsis
+        var addr2 = document.createElement("div");
+        addr2.className = "jibun ellipsis";
+        addr2.appendChild(document.createTextNode(pos.addr2));
+        // 관광지 전화번호 desc > tel
+        var tel = document.createElement("div");
+        tel.className = "tel";
+        tel.appendChild(document.createTextNode(pos.tel));
+
+        desc.appendChild(addr1);
+        desc.appendChild(addr2);
+        desc.appendChild(tel);
+
+        body.appendChild(desc);
+
+        info.appendChild(body);
+
+        // 태그들 취합
+        wrap.appendChild(info);
+
+        // customoverlay 생성, 이때 map을 선언하지 않으면 지도위에 올라가지 않습니다.
+        var overlay = new window.daum.maps.CustomOverlay({
+          position: pos.latlng,
+          content: wrap,
+        });
+
+        // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+        window.kakao.maps.event.addListener(marker, "click", function () {
+          overlay.setMap(map);
+        });
+      });
+
+      // 첫번째 검색 정보를 이용하여 지도 중심을 이동 시킵니다
+      this.map.setCenter(positions[0].latlng);
+    }
+    ,
     loadScript() {
       const script = document.createElement("script");
       script.src =
         "//dapi.kakao.com/v2/maps/sdk.js?appkey=" +
         process.env.VUE_APP_KAKAO_KEY +
-        "&autoload=false";
+        "&autoload=false&libraries=services,clusterer,drawing";
       /* global kakao */
       script.onload = () => window.kakao.maps.load(this.loadMap);
 
@@ -62,22 +158,22 @@ export default {
       //   this.loadMaker();
     },
     loadMaker() {
-      this.deleteMarker();
-
+      // this.deleteMarker();
+      console.log("loadMarker");
       // 마커 이미지를 생성합니다
-      //   const imgSrc = require("@/assets/map/markerStar.png");
+      // const imgSrc = "https://t1.daumcdn.net/localimages/07/mapapidoc/markerStar.png";
       // 마커 이미지의 이미지 크기 입니다
-      //   const imgSize = new kakao.maps.Size(24, 35);
-      //   const markerImage = new kakao.maps.MarkerImage(imgSrc, imgSize);
+      // const imgSize = new kakao.maps.Size(24, 35);
+      // const markerImage = new kakao.maps.MarkerImage(imgSrc, imgSize);
 
       // 마커를 생성합니다
       this.markers = [];
       this.positions.forEach((position) => {
-        const marker = new kakao.maps.Marker({
+        const marker = new window.kakao.maps.Marker({
           map: this.map, // 마커를 표시할 지도
           position: position.latlng, // 마커를 표시할 위치
           title: position.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-          //   image: markerImage, // 마커의 이미지
+          // image: markerImage, // 마커의 이미지
         });
         this.markers.push(marker);
       });
@@ -85,12 +181,13 @@ export default {
 
       // 4. 지도를 이동시켜주기
       // 배열.reduce( (누적값, 현재값, 인덱스, 요소)=>{ return 결과값}, 초기값);
-      const bounds = this.positions.reduce(
-        (bounds, position) => bounds.extend(position.latlng),
-        new kakao.maps.LatLngBounds()
-      );
+      // const bounds = this.positions.reduce(
+      //   (bounds, position) => bounds.extend(position.latlng),
+      //   new window.kakao.maps.LatLngBounds()
+      // );
 
-      this.map.setBounds(bounds);
+      // this.map.setBounds(bounds);
+      this.map.setCenter(this.positions[0].latlng);
     },
     deleteMarker() {
       if (this.markers.length > 0) {

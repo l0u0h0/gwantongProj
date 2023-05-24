@@ -31,6 +31,7 @@ public class TripController {
 	@GetMapping("searchByType")
 	@ResponseBody
 	public List<TripVO> searchByType(int type) {
+		System.out.println(type);
 		try {
 			return tripService.searchByType(type);
 		} catch (MyException e) {

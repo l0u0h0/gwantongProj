@@ -17,8 +17,9 @@ export const useAreaStore = defineStore("area", () => {
   function GetSido() {
     getSido(
       (data) => {
-        if (data.message === "OK") {
+        if (data.data === "OK") {
           // 시도 데이터 가져오기 성공
+          console.log(data);
         } else {
           // 시도 데이터 가져오기 실패
         }
