@@ -7,7 +7,7 @@ defineProps({
   rows: {
     type: Array,
     required: true,
-    img: String,
+    first_image: String,
     title: String,
     address: String,
     type: String,
@@ -48,12 +48,12 @@ export default {
                 <tbody>
                   <tr
                     class="text-center col"
-                    v-for="({ img, title, address, type, tel }, index) of rows"
+                    v-for="({ first_image, title, address, type, tel }, index) of rows"
                     :key="index"
                   >
                     <td>
                       <div class="px-3 py-2 opacity-9">
-                        <img :src="img" :alt="title + 'img'" class="w-70" />
+                        <img :src="first_image" :alt="title + 'img'" class="w-70" />
                       </div>
                     </td>
                     <td>

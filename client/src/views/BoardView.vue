@@ -7,6 +7,13 @@ import DefaultFooter from "@/components/common/FooterDefault.vue";
 
 // typed import
 import Typed from "typed.js";
+// pinia
+import { useUserStore } from "@/store/modules/userStore";
+import { storeToRefs } from "pinia";
+
+const store = useUserStore();
+
+const { userinfo } = storeToRefs(store);
 
 const body = document.getElementsByTagName("body")[0];
 //hooks
@@ -26,10 +33,9 @@ onMounted(() => {
     });
   }
 });
-let user =
-  sessionStorage.getItem("logged") != null
-    ? sessionStorage.getItem("logged")
-    : null;
+if (sessionStorage.getItem("logged") != null) {
+    store.setUserInfo(sessionStorage.getItem("logged"));
+  } else store.setUserInfo(null);
 onUnmounted(() => {
   body.classList.remove("about-us");
   body.classList.remove("bg-gray-200");
@@ -37,23 +43,24 @@ onUnmounted(() => {
 </script>
 <template>
   <div>
-    <!-- 로그인 하기 전 상태 -->
+    <!-- 로그인 하기 전 상상태 -->
     <DefaultNavbar
-      v-if="!user"
+      v-if="!userinfo"
+      :user="userinfo"
       :action="{
-        user: `${user}`,
         route: '/user/signin',
         label: '로그인',
         color: 'btn-dark',
       }"
       :sticky="true"
     />
-    <!-- // 로그인 한 상태 -->
+    <!-- 로그인 한 상태 -->
     <DefaultNavbar
       v-else
+      :user="userinfo"
+      :key="userinfo"
       :action="{
-        user: `${user}`,
-        route: '/user/logout',
+        route: '#',
         label: '로그아웃',
         color: 'btn-dark',
       }"

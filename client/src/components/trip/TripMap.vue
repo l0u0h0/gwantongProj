@@ -19,28 +19,31 @@ export default {
     places: [],
   },
   watch: {
-    places() {
-      console.log(this.places);
-      this.positions = [];
-      this.places.forEach((place) => {
-        let obj = {};
-        obj.title = place.title;
-        obj.latlng = new kakao.maps.LatLng(place.latitude, place.longitude);
-        obj.img = place.first_image;
-        obj.addr1 = place.addr1;
-        obj.addr2 = place.addr2;
-        obj.tel = place.tel;
+    places: {
+      deep: true,
+      handler() {
+        console.log(this.places);
+        this.positions = [];
+        this.places.forEach((place) => {
+          let obj = {};
+          obj.title = place.title;
+          obj.latlng = new kakao.maps.LatLng(place.latitude, place.longitude);
+          obj.img = place.first_image;
+          obj.addr1 = place.addr1;
+          obj.addr2 = place.addr2;
+          obj.tel = place.tel;
 
-        this.positions.push(obj);
-      });
-      console.log(this.positions);
-      this.loadMaker();
-      // this.displayMarker();
+          this.positions.push(obj);
+        });
+        console.log(this.positions);
+        // this.loadMaker();
+        this.displayMarker();
+      }
     },
   },
-  created() {},
   mounted() {
     if (window.kakao && window.kakao.maps) {
+      console.log(typeof this.places);
       this.loadMap();
     } else {
       this.loadScript();
@@ -144,9 +147,9 @@ export default {
         center: new window.kakao.maps.LatLng(33.450701, 126.570667),
         level: 3,
       };
-
+      
       this.map = new window.kakao.maps.Map(container, options);
-      //   this.loadMaker();
+      // this.loadMaker();
     },
     loadMaker() {
       this.deleteMarker();

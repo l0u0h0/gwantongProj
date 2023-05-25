@@ -18,32 +18,15 @@ let showDropdownArea = ref(false);
 let showDropdownType = ref(false);
 
 // list dummy data
-const tableDatas = [
-  {
-    img: "http://tong.visitkorea.or.kr/cms/resource/21/2657021_image2_1.jpg",
-    title: "제주공항",
-    address: "제주시 1번가",
-    type: "관광지",
-    tel: "010-2067-9786",
-  },
-  {
-    img: "http://tong.visitkorea.or.kr/cms/resource/21/2657021_image2_1.jpg",
-    title: "제주공항",
-    address: "제주시 1번가",
-    type: "관광지",
-    tel: "010-2067-9786",
-  },
-];
+let tableDatas = [];
 
-let datas = null;
+let datas = [];
 
-const search = async () => {
+async function search() {
+  datas = [];
   let areaCode = document.getElementById("search-area").value;
   let areaDetailCode = document.getElementById("search-area-detail").value;
   let typeCode = document.getElementById("search-type").value;
-  console.log(areaCode);
-  console.log(areaDetailCode);
-  console.log(typeCode);
 
   if (areaDetailCode == 0 || areaCode == 0) {
     await searchByType(
@@ -66,24 +49,27 @@ const search = async () => {
       }
     );
   }
-
-  console.log(datas);
+  tableDatas = [];
 
   if (datas.length > 10) {
     for (let i = 0; i < 10; i++) {
-      tableDatas[i].img = datas[i].first_image != null ? datas[i].first_image : "";
-      tableDatas[i].title = datas[i].title;
-      tableDatas[i].address = datas[i].addr1 + " " + datas[i].addr2;
-      tableDatas[i].tel = datas[i].tel;
+      tableDatas.push(datas[i]);
+      // tableDatas[i].img = datas[i].first_image != null ? datas[i].first_image : "";
+      // tableDatas[i].title = datas[i].title;
+      // tableDatas[i].address = datas[i].addr1 + " " + datas[i].addr2;
+      // tableDatas[i].tel = datas[i].tel;
     }
   } else {
     for (let i = 0; i < datas.length; i++) {
-      tableDatas[i].img = datas[i].first_image != null ? datas[i].first_image : "";
-      tableDatas[i].title = datas[i].title;
-      tableDatas[i].address = datas[i].addr1 + " " + datas[i].addr2;
-      tableDatas[i].tel = datas[i].tel;
+      tableDatas.push(datas[i]);
+      // tableDatas[i].img = datas[i].first_image != null ? datas[i].first_image : "";
+      // tableDatas[i].title = datas[i].title;
+      // tableDatas[i].address = datas[i].addr1 + " " + datas[i].addr2;
+      // tableDatas[i].tel = datas[i].tel;
     }
   }
+  console.log(datas);
+  console.log(tableDatas);
 };
 
 onMounted(async () => {
@@ -230,7 +216,7 @@ onMounted(async () => {
         </div>
         <div class="col-lg-9 ms-auto mt-lg-0">
           <div class="position-relative">
-            <trip-map class="mb-4" :places="datas"></trip-map>
+            <trip-map class="mb-4" :places="datas" :key="datas"></trip-map>
           </div>
         </div>
       </div>
