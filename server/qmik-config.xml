@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<databases>
+		<database id="damp">
+			<url>jdbc:mysql://localhost:3306/damp</url>
+			<user>ssafy</user>
+			<password>ssafy</password>
+		</database>
+		<database id="dampsecure">
+			<url>jdbc:postgresql://localhost:5432/damp</url>
+			<user>ssafy</user>
+			<password>ssafy</password>
+		</database>
+	</databases>
+</configuration>
