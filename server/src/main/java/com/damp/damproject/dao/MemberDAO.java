@@ -1,12 +1,15 @@
 package com.damp.damproject.dao;
 
 import java.sql.*;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
+import com.damp.damproject.qmik.damp.MEMBER;
 import com.damp.damproject.util.DBUtil;
 import com.damp.damproject.util.MyException;
 import com.damp.damproject.vo.MemberVO;
+import com.qmik.query.SelectQuery;
 
 @Repository
 public class MemberDAO {
@@ -16,33 +19,18 @@ public class MemberDAO {
 	final static String password = "ssafy";
 
 	public MemberVO login(MemberVO member) throws MyException {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		Map<String, Object> result = new SelectQuery(MEMBER.class)
+													.where(MEMBER.member_id.equal(member.getMemberId()))
+													.and(MEMBER.password.equal(member.getPassword()))
+													.execute();
 		
-		try {
-			con = DBUtil.getConnection(url, user, password);
-			
-			String sql = "select * from member where member_id = ? and password = ?";
-			pstmt = con.prepareStatement(sql);
-			
-			pstmt.setString(1, member.getMemberId());
-			pstmt.setString(2, member.getPassword());
-			
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				member.setId(rs.getInt("id"));
-				member.setName(rs.getString("name"));
-				member.setEmail(rs.getString("email"));
-				member.setAddress(rs.getString("address"));
-				return member;
-			}
-			return null;
-		} catch (SQLException e) {
-			throw new MyException("로그인 실패");
-		} finally {
-			DBUtil.close(rs, pstmt, con);
-		}
+		if (result == null) return null;
+		
+		member.setId((int) result.get("id"));
+		member.setName((String) result.get("name"));
+		member.setEmail((String) result.get("email"));
+		member.setAddress((String) result.get("address"));
+		return member;
 	}
 
 	public void register(MemberVO member) throws MyException {
