@@ -1,6 +1,4 @@
-import jwtDecode from "jwt-decode";
 import { defineStore } from "pinia";
-import { computed, ref } from "vue";
 import router from "@/router";
 import {
   login,
@@ -11,43 +9,38 @@ import {
 } from "@/service/user";
 
 export const useUserStore = defineStore("user", () => {
-  const userCookie = ref("");
-
-  const setUserCookie = computed((str) => {
-    userCookie.value = str;
-  });
-  const deleteCookie = computed(() => {
-    userCookie.value = "";
-  });
 
   function Login(id, password) {
     const user = { memberId: id, password, name: "", email: "", address: "" };
-    login(
-      user,
-      (data) => {
-        if (data.data === "OK") {
-          // 로그인 성공
-          alert("로그인 성공!!");
-          const userCookie = document.cookie.split("=");
-          setUserCookie(userCookie[0]);
-          sessionStorage.setItem(`${userCookie[0]}`, `${userCookie[1]}`);
-        } else {
-          // 로그인 실패
-          alert("로그인 실패!!");
+    let flag = false;
+      login(
+        user,
+        (data) => {
+          res = data.data;
+          console.log(data);
+          if (data.data === "OK") {
+            // 로그인 성공
+            alert("로그인 성공!!");
+            sessionStorage.setItem("logged", document.cookie);
+            flag = true;
+          } else {
+            // 로그인 실패
+            alert("로그인 실패!!");
+          }
+        },
+        (error) => {
+          res = error;
+          console.error(error);
         }
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
+      );
+    if (!flag) router.push("/");
   }
   function Logout() {
     logout(
       (data) => {
         if (data.data === "OK") {
           // 로그아웃 성공
-          sessionStorage.removeItem("");
-          deleteCookie();
+          sessionStorage.removeItem("logged");
           router.push("/");
         } else {
           // 로그아웃 실패
@@ -128,9 +121,6 @@ export const useUserStore = defineStore("user", () => {
   }
 
   return {
-    userCookie,
-    setUserCookie,
-    deleteCookie,
     Login,
     Logout,
     MemberInsert,

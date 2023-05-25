@@ -24,7 +24,7 @@ public class MemberController {
 
 	@PostMapping("login")
 	@ResponseBody
-	public String login(MemberVO member, HttpServletResponse response, HttpServletRequest request) {
+	public String login(@RequestBody MemberVO member, HttpServletResponse response, HttpServletRequest request) {
 		try {
 			member = memberService.login(member);
 			if (member == null)
@@ -32,11 +32,11 @@ public class MemberController {
 
 			HttpSession session = request.getSession();
 			session.setAttribute("member", member);
-
+			
 			Cookie cookie = new Cookie("JSESSIONID", session.getId());
 			cookie.setPath("/");
 			response.addCookie(cookie);
-
+			System.out.println("김수환 왕바보");
 			return "OK";
 		} catch (MyException e) {
 			e.printStackTrace();
@@ -47,7 +47,6 @@ public class MemberController {
 	@GetMapping("logout")
 	@ResponseBody
 	public String logout(HttpServletRequest request) {
-		System.out.println("hello");
 		HttpSession session = request.getSession(false);
 		if (session != null)
 			session.invalidate();

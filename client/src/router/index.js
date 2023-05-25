@@ -26,7 +26,7 @@ const router = createRouter({
     {
       path: "/user",
       name: "user",
-      redirect: "/user/signin",
+      redirect: "about",
       component: UserView,
       children: [
         {

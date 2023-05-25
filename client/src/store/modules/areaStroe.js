@@ -1,16 +1,10 @@
 import { defineStore } from "pinia";
-import { computed, ref } from "vue";
 import {
   searchByType,
   searchByaddress,
 } from "@/service/area";
 
-// 얘를 전역으로 관리하는게 맞을까??
-// 과연/?????
-
 export const useAreaStore = defineStore("area", () => {
-  let sidoList = ref([{}]);
-  let gugunList = ref([{}]);
 
   function SearchByAddress(sido, gugun) {
     const area = { sido, gugun };
@@ -45,8 +39,6 @@ export const useAreaStore = defineStore("area", () => {
   }
 
   return {
-    sidoList,
-    gugunList,
     SearchByAddress,
     SearchByType,
   };

@@ -61,6 +61,11 @@ watch(
     }
   }
 );
+
+function logout() {
+  store.Logout();
+  location.reload();
+}
 /**
  * 로그인되면 유저 정보 세션에 넣기
  */
@@ -156,7 +161,7 @@ watch(
           <li class="nav-item">
             <a
               :href="action.route"
-              @click="store.Logout()"
+              @click="logout()"
               class="btn btn-sm mb-0 font-size-lg"
               :class="action.color"
               >{{ action.label }}</a

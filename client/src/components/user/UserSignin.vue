@@ -102,7 +102,7 @@ export default {
               <div class="card-body">
                 <form class="text-start">
                   <MaterialInput
-                    v-model="id"
+                    v-model.lazy="id"
                     id="id"
                     class="input-group-outline my-3"
                     :label="{
@@ -112,7 +112,7 @@ export default {
                     type="text"
                   />
                   <MaterialInput
-                    v-model="password"
+                    v-model.lazy="password"
                     id="password"
                     class="input-group-outline mb-3"
                     :label="{

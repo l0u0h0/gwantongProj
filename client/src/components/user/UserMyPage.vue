@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, onUnmounted } from "vue";
-import router from "@/router";
+import axios from "axios";
 
 // common components
 import DefaultNavbar from "@/components/common/NavbarDefault.vue";
@@ -20,9 +20,6 @@ import Typed from "typed.js";
 
 // pinia
 import { useUserStore } from "@/store/modules/userStore";
-
-// import TripService
-import { getSido, getGugun } from "@/service/area";
 
 const store = useUserStore();
 
@@ -46,14 +43,12 @@ onMounted(async () => {
     });
   }
 
-  await getSido(
-    (data) => {
-      makeOption(data);
-    },
-    (error) => {
-      console.error(error);
-    }
-  );
+  const areaUrl =
+    "https://apis.data.go.kr/B551011/KorService1/areaCode1?serviceKey=" +
+    process.env.VUE_APP_AREA_API_KEY +
+    "&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json";
+
+  await axios.get(areaUrl).then((data) => makeOption(data));
 
   function makeOption(data) {
     const areas = data.data.response.body.items.item;
@@ -69,20 +64,17 @@ onMounted(async () => {
   }
   document.getElementById("search-area").addEventListener("click", () => {
     let areaCode = document.getElementById("search-area").value;
+    let areaUrl =
+      "https://apis.data.go.kr/B551011/KorService1/areaCode1?serviceKey=" +
+      process.env.VUE_APP_AREA_API_KEY +
+      "&numOfRows=30&pageNo=1&MobileOS=ETC&areaCode=" +
+      areaCode +
+      "&MobileApp=AppTest&_type=json";
 
-    getGugun(
-      areaCode,
-      (data) => {
-        makeOption(data);
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
+    axios.get(areaUrl).then((data) => makeOption(data));
 
     function makeOption(data) {
       let areas = data.data.response.body.items.item;
-      console.log(areas);
       let sel = document.getElementById("search-area-detail");
 
       sel.innerHTML = '<option value="0" selected>검색 할 구/군 선택</option>';

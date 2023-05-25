@@ -71,17 +71,17 @@ const search = async () => {
 
   if (datas.length > 10) {
     for (let i = 0; i < 10; i++) {
-      tableDatas[i].img = datas[i].img != null ? datas[i].img : "";
+      tableDatas[i].img = datas[i].first_image != null ? datas[i].first_image : "";
       tableDatas[i].title = datas[i].title;
       tableDatas[i].address = datas[i].addr1 + " " + datas[i].addr2;
       tableDatas[i].tel = datas[i].tel;
     }
   } else {
-    for ((i, data) in datas) {
-      tableDatas[i].img = data.img != null ? data.img : "";
-      tableDatas[i].title = data.title;
-      tableDatas[i].address = data.addr1 + " " + data.addr2;
-      tableDatas[i].tel = data.tel;
+    for (let i = 0; i < datas.length; i++) {
+      tableDatas[i].img = datas[i].first_image != null ? datas[i].first_image : "";
+      tableDatas[i].title = datas[i].title;
+      tableDatas[i].address = datas[i].addr1 + " " + datas[i].addr2;
+      tableDatas[i].tel = datas[i].tel;
     }
   }
 };

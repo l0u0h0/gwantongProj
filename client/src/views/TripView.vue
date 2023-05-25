@@ -30,7 +30,10 @@ onMounted(() => {
     });
   }
 });
-
+let user =
+  sessionStorage.getItem("logged") != null
+    ? sessionStorage.getItem("logged")
+    : null;
 onUnmounted(() => {
   body.classList.remove("about-us");
   body.classList.remove("bg-gray-200");
