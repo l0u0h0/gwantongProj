@@ -62,6 +62,13 @@ watch(
   }
 );
 
+watch(
+  () => props.user,
+  () => {
+    this.$forceUpdtae();
+  }
+)
+
 function logout() {
   store.Logout();
   location.reload();

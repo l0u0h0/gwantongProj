@@ -13,28 +13,29 @@ export const useUserStore = defineStore("user", () => {
   function Login(id, password) {
     const user = { memberId: id, password, name: "", email: "", address: "" };
     let flag = false;
-      login(
-        user,
-        (data) => {
-          res = data.data;
-          console.log(data);
-          if (data.data === "OK") {
-            // 로그인 성공
-            alert("로그인 성공!!");
-            sessionStorage.setItem("logged", document.cookie);
-            flag = true;
-          } else {
-            // 로그인 실패
-            alert("로그인 실패!!");
-          }
-        },
-        (error) => {
-          res = error;
-          console.error(error);
+    login(
+      user,
+      (data) => {
+        console.log(data);
+        if (data.data === "OK") {
+          // 로그인 성공
+          alert("로그인 성공!!");
+          sessionStorage.setItem("logged", document.cookie);
+          flag = true;
+        } else {
+          // 로그인 실패
+          alert("로그인 실패!!");
         }
-      );
-    if (!flag) router.push("/");
-  }
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+    if (!flag) {
+      router.push("/");
+    }
+  };
+  
   function Logout() {
     logout(
       (data) => {
