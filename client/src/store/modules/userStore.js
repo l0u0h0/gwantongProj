@@ -7,8 +7,14 @@ import {
   memberModify,
   memberDelete,
 } from "@/service/user";
+import { ref } from "vue";
 
 export const useUserStore = defineStore("user", () => {
+  const userinfo = ref("");
+
+  function setUserInfo(str) {
+    userinfo.value = str;
+  }
 
   function Login(id, password) {
     const user = { memberId: id, password, name: "", email: "", address: "" };
@@ -35,7 +41,7 @@ export const useUserStore = defineStore("user", () => {
       router.push("/");
     }
   };
-  
+
   function Logout() {
     logout(
       (data) => {
@@ -122,6 +128,8 @@ export const useUserStore = defineStore("user", () => {
   }
 
   return {
+    userinfo,
+    setUserInfo,
     Login,
     Logout,
     MemberInsert,

@@ -62,20 +62,11 @@ watch(
   }
 );
 
-watch(
-  () => props.user,
-  () => {
-    this.$forceUpdtae();
-  }
-)
-
 function logout() {
   store.Logout();
   location.reload();
 }
-/**
- * 로그인되면 유저 정보 세션에 넣기
- */
+
 </script>
 <template>
   <nav

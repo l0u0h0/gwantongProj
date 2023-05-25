@@ -16,7 +16,17 @@ import Information from "@/components/about/AboutInformation.vue";
 import Featuring from "@/components/about/AboutFeaturing.vue";
 import TheCubeView from "@/components/about/TheCubeView.vue";
 
+// pinia
+import { useUserStore } from "@/store/modules/userStore";
+import { storeToRefs } from "pinia";
+
+const store = useUserStore();
+
+const { userinfo } = storeToRefs(store);
+
 const body = document.getElementsByTagName("body")[0];
+
+let user = null;
 
 //hooks
 onMounted(() => {
@@ -45,11 +55,18 @@ onMounted(() => {
       loop: true,
     });
   }
-});
-let user =
+  console.log(sessionStorage.getItem("logged"));
+
+  user =
   sessionStorage.getItem("logged") != null
     ? sessionStorage.getItem("logged")
-    : null;
+      : null;
+  if (sessionStorage.getItem("logged") != null) {
+    store.setUserInfo(sessionStorage.getItem("logged"));
+  } else store.setUserInfo(null);
+});
+console.log(user);
+
 onUnmounted(() => {
   body.classList.remove("about-us");
   body.classList.remove("bg-gray-200");
@@ -59,8 +76,8 @@ onUnmounted(() => {
   <div>
     <!-- 로그인 하기 전 상상태 -->
     <DefaultNavbar
-      v-if="!user"
-      :user="user"
+      v-if="!userinfo"
+      :user="userinfo"
       :action="{
         route: '/user/signin',
         label: '로그인',
@@ -72,7 +89,8 @@ onUnmounted(() => {
     <!-- 로그인 한 상태 -->
     <DefaultNavbar
       v-else
-      :user="user"
+      :user="userinfo"
+      :key="userinfo"
       :action="{
         route: '#',
         label: '로그아웃',
